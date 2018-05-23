@@ -1,0 +1,1612 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{set\_3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{6.832: Problem Set \#3}\label{problem-set-3}
+
+Due on Friday, March 16, 2018 at 17:00. See course website for
+submission details. Use Drake release tag \texttt{drake-20180307}, i.e.
+use this notebook via
+\texttt{./docker\_run\_notebook.sh\ drake-20180307\ .}, or whichever
+script you need for your platform.
+
+To submit for autograding, upload this file, \emph{and also the
+inertial\_wheel\_pendulum.py and
+inertial\_wheel\_pendulum\_visualizer.py files supplied to you with any
+modifications you have made}, to the "Problem Set 3, Code Submission"
+assignment.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{About this problem set}\label{about-this-problem-set}
+
+This problem set will entirely live inside this jupyter notebook.
+
+Grades will be assigned based on three components:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Manually graded free-response questions} -\/- the TAs will
+  manually assign grades to your answers to short answer responses. You
+  can write inline responses using
+  \href{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet}{Markdown}
+  with inline LaTeX -\/- double-click on any problem writeup to see some
+  examples. Double-click response areas to edit them, and press
+  Control-Enter to finish editing them.
+\item
+  \textbf{Automated code testing} -\/- we will run automated tests
+  against specific functions (see more details when we introduce the
+  first coding test).
+\item
+  \textbf{Quick code review} -\/- we will perform a quick manual check
+  to make sure you have actually implemented the functions correctly (as
+  opposed to hacked the unit tests to pass!).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \section{1. Lyapunov Theory}\label{lyapunov-theory}
+
+The following are a series of short answer problems meant to test your
+understanding of Lyapunov functions and Lyapunov theory.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{Quick check for
+understanding}\label{quick-check-for-understanding}
+
+\paragraph{We recommend you stop for a second to make sure you can
+answer the following
+questions:}\label{we-recommend-you-stop-for-a-second-to-make-sure-you-can-answer-the-following-questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What is a Lyapunov function?
+\item
+  How does Lyanpunov theory relate to robots?
+\item
+  What is the relationship between Lyapunov functions -\/- we have been
+  writing them as \(V(x)\) -\/- and cost-to-go functions -\/- we have
+  been writing them as \(J(x)\)?
+\item
+  What are the conditions for making a Lyapunov function valid?
+\item
+  Just a function \(V(x)\) doesn't itself demand anything about how the
+  function will evolve over time. How do we bring the idea of evolution
+  over time into our Lyapunov analysis?
+\item
+  If somebody gives you a Lyapunov function \(V(x)\) and a dynamical
+  system \(\dot{x} = f(x)\), is it hard to check if \(V\) is a valid
+  Lyapunov function?
+\item
+  If you would like to find a Lyapunov function on your own, how might
+  you do that?
+\item
+  Can you prove the nonexistence of a Lyapunov function, for a
+  particular system?
+\end{enumerate}
+
+(We won't grade answers to these questions, but are happy to talk about
+your answers. Office hours are the best opportunities to discuss.)
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{1.1 (2 points)}\label{points}
+
+A dynamical system is defined by the equations
+\(\dot{x_1}=f_1(x_1,x_2)\) and \(\dot{x_2}=f_2(x_1,x_2)\). You find that
+the function \(V=\frac{1}{2}x_1^2\) has a derivative
+\(\dot{V} = \left[\dfrac{dV}{dx_1}, \dfrac{dV}{dx_2}\right] \left[ f_1, f_2 \right]^T\)
+which is negative semidefinite. What, if anything, can you prove about
+the behavior of this system with this function \(V\)?
+
+    \textbf{Short answer explanation for 1.1.}
+
+It is stable in the sense of Lyapunov.
+
+    \subsection{1.2 (4 points)}\label{points}
+
+For the system
+
+\begin{align}
+\dot{x_1}&=-\frac{6x_1}{(1+x_1^2)^2}+2x_2  \\
+\dot{x_2}&=-\frac{2(x_1+x_2)}{(1+x_1^2)^2}
+\end{align}
+
+you are given the positive definite function
+\(V(x) =\frac{x_1^2}{1 + x_1^2}+ x_2^2\) and told that, for this system,
+\(\dot{V}\) is negative definite over the entire space. Is \(V\) a valid
+Lyapunov function which proves global asymptotic stability to the origin
+for the system described by these equations? Why or why not? Hint:
+Trying simulating a few trajectories of this system or plotting the
+vector field to build more intuition before answering this problem.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} Sandbox for doing math, plotting}
+        \PY{c+c1}{\PYZsh{} You might find this reference useful for making quiver plots / plotting vector fields:}
+        \PY{c+c1}{\PYZsh{} https://matplotlib.org/examples/pylab\PYZus{}examples/quiver\PYZus{}demo.html}
+\end{Verbatim}
+
+
+    \textbf{Short answer explanation for 1.2.}
+
+\[\dot{V} = \frac{2 x_1}/{(1 + x_1^2)^2}\left[-\frac{6x_1}{(1+x_1^2)^2}+2x_2 \right]   - 2 x_2 \frac{2(x_1+x_2)}{(1+x_1^2)^2}\]
+
+\[\dot{V} = \frac{-2}{(1 + x_1^2)^2} \left[ \frac{6x_1^2}{(1+x_1^2)^2}+2x_1 x_2 + 2 x_1 x_2 + 2x_2^2 \right]\]
+
+YOUR ANSWER HERE
+
+    \subsection{1.3 (2 points)}\label{points}
+
+Given dynamics \(\dot{x} = f(x)\) and a Lyapunov candidate \(V(x)\), let
+\(D\) be any domain such that for all \(\hat{x} \in D\), \(V(\hat{x})\)
+is positive definite and \(\dot{V}(\hat{x})\) is negative definite.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Can we say that all initial conditions inside \(D\) will stay inside
+  \(D\)? Why or why not?
+\item
+  Can we say that all initial conditions inside \(D\) will converge to
+  the origin? Why or why not?
+\end{enumerate}
+
+    \textbf{Short answer explanation for 1.3.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  No, suppose D contains only a single point \(x_1\). You can easily
+  construct \(f\), \(V\) such that \(x\) will leave the region (namely a
+  nonzero function \(f\)).
+\item
+  No, you can construct a point which asymptotes to a non-zero value
+  (i.e. consider a negative expoential with a nonzero offset).
+\end{enumerate}
+
+    \subsection{1.4 (2 points)}\label{points}
+
+If \(V_1(x)\) and \(V_2(x)\) are valid Lyapunov functions that prove
+global stability of a system to the origin, does \(V_1(x)\) necessarily
+equal \(V_2(x)\)? In other words, are Lyapunov functions unique? Why or
+why not?
+
+    \textbf{Short answer explanation for 1.4.}
+
+No, consider multiplying any V by a positive constant to get a new
+function.
+
+    \subsection{1.5 (4 points)}\label{points}
+
+Consider the system given by
+
+\begin{equation}
+\dot{x}= \left(\begin{array}{c} {x_2} - {{x_1}}^3\\  - {{x_2}}^3 - {x_1} \end{array}\right)\label{p2System}
+\end{equation}
+
+Show that the Lyapunov function
+
+\[
+V(x) = x_1^2 + x_2^2 
+\]
+
+proves global asymptotic stability of the above equation to the origin.
+
+    \textbf{Short answer explanation for 1.5.}
+
+\begin{align}
+V' &= \nabla V \cdot \dot{x}\\
+&= -2(x_1^4+x_2^4)
+\end{align}
+
+Clearly from this \(V'\) is negative definite everywhere (except zero at
+origin), and V is positive definite (except zero at the origin). Thus it
+is globally stable as \(V \rightarrow \infty\) as
+\(x \rightarrow \infty\).
+
+    \section{2. Sums of Squares (SOS) for Lyapunov
+functions}\label{sums-of-squares-sos-for-lyapunov-functions}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{Quick check for
+understanding}\label{quick-check-for-understanding}
+
+\paragraph{We recommend you stop for a second to make sure you can
+answer the following
+questions:}\label{we-recommend-you-stop-for-a-second-to-make-sure-you-can-answer-the-following-questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What is the simplest example of a function that is a sum of squares?
+\item
+  What is arguably the most useful property of functions that are sums
+  of squares? When are they positive? When are they negative?
+\item
+  Are there functions that also have this property, but do not belong to
+  the set of sums of squares? (Hint: Google the Motzkin polynomial
+  mentioned in class.)
+\item
+  How do sums of squares (SOS) relate to Lyapunov functions?
+\item
+  Specifically, which property (or properties) of Lyapunov functions do
+  we relate to them being sums of squares or not?
+\item
+  To make an expressive set of functions over our state space, we choose
+  some set of monomials \(m(x)\). What are some examples of good choices
+  for \(m(x)\)?
+\item
+  What does the form \(V(x) = m^T(x) Q m^T(x)\) have to do with a
+  function being sums of squares?
+\item
+  Searching for \(Q\) in the above question can be formulated as a
+  Semidefinite Program. What is the difference between Quadratic
+  Programming and Semidefinite Programming?
+\item
+  If we find, using SOS optimization, a valid Lyapunov function, then
+  what does this say about our system?
+\item
+  If we cannot find, using SOS optimization, a valid Lyapunov function,
+  then what does this say about our system?
+\item
+  We are using SOS to help find Lyapunov functions. How does this help
+  our robots?
+\end{enumerate}
+
+(We won't grade answers to these questions, but are happy to talk about
+your answers. Office hours are the best opportunities to discuss.)
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \subsection{2.1 (4 points, 4/4 autograded)}\label{points-44-autograded}
+
+Consider the polynomial: \[
+p(x_1,x_2) = 2x_1^4 + 2x_1^3x_2 - x_1^2x_2^2 + 5x_2^4.
+\]
+
+\textbf{Prove that this polynomial is nonnegative} by finding a
+representation as follows:
+
+\[
+p(x_1,x_2) = \left[ \begin{array}{c}
+x_1^2 \\
+x_2^2 \\
+x_1 x_2 \end{array} \right]^T
+\ \ \
+Q
+\ \ \
+\left[ \begin{array}{c}
+x_1^2 \\
+x_2^2 \\
+x_1 x_2 \end{array} \right]
+\]
+
+where (Q) is given by: \[
+Q = \left[ \begin{array}{ccc}
+2, \ a, \ 1 \\
+a, \ 5, \ 0 \\
+1, \ 0, \ b \end{array} \right].
+\]
+
+Here (Q) must be positive semidefinite. \textbf{Type your value for
+\(Q\) below.} Make sure that the resulting (Q) is positive semidefinite.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{User code for problem 2.1.}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k}{def} \PY{n+nf}{problem\PYZus{}2\PYZus{}1\PYZus{}get\PYZus{}Q}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} Set a and b appropriately done by matching coefficients, and ensuring that the diagonal vector of Q \PYZgt{} 0}
+            \PY{n}{a} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+            \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{n}{Q} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+                \PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}
+                \PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}
+                \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{b}\PY{p}{]}
+            \PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{Q}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Q = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{problem\PYZus{}2\PYZus{}1\PYZus{}get\PYZus{}Q}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Q =  [[ 2 -1  1]
+ [-1  5  0]
+ [ 1  0  1]]
+
+    \end{Verbatim}
+
+    Finding such positive semidefinite Q, for carefully (but usually
+automatically) selected basis vectors, is at the heart of using SOS
+techniques for verification.
+
+The textbook demonstrates
+\href{https://github.com/RussTedrake/underactuated/blob/master/src/lyapunov/cubic_polynomial.py}{verification
+of the ROA of a cubic polynomial system} as an example (the example
+system appearing in the latter half of the
+\href{http://underactuated.csail.mit.edu/underactuated.html?chapter=lyapunov}{Lyapunov
+chapter of the text}. This code can be copy-pasted into this notebook,
+if you want to give it a try. A simpler example of framing the search
+for a common Lyapunov function search for multiple linear systems is
+\href{https://github.com/RussTedrake/underactuated/blob/master/src/lyapunov/linear_systems_common_lyapunov.py}{also
+available} as a demonstration of semidefinite programming.
+
+    \section{3. Inertial Wheel Pendulum}\label{inertial-wheel-pendulum}
+
+In this question we'll use a classic underactuated system, the inertial
+wheel pendulum, to do a case study in bringing together all of these
+components:
+
+\begin{itemize}
+\tightlist
+\item
+  Stabilization at the upright position using LQR (and how to linearize
+  around a fixed point)
+\item
+  Finding where is our LQR controller "good", i.e. computing the region
+  of attraction (RoA)
+\item
+  Swinging up with a simple energy-shaping controller and switching to
+  LQR when inside the RoA
+\end{itemize}
+
+An inertial wheel pendulum is a single-link pendulum with a
+torque-controlled reaction wheel mounted at its end:
+
+\emph{(Image source Ramirez-Neria, Mario, et al. "On the linear Active
+Disturbance Rejection Control of the inertia wheel pendulum.")}
+
+The angle of the pendulum is \(\theta_1\), and the angle of the reaction
+wheel is \(\theta_2\). The only control input is a (bounded) torque
+applied to the wheel, \(\tau\) \[
+{x} = \left[ \begin{array}{c} q
+\\ \dot q 
+\end{array} \right]
+\ \ \ \ \
+{q} = \left[ \begin{array}{c}
+\theta_1 \\
+\theta_2 \end{array} \right]
+\ \ \ \ \
+{u} = \left[ \tau \right]
+\ \ \ \ \
+|\tau| \leq \tau_{max}
+\]
+
+Highly recommended to watch some videos of inertial wheel pendulums in
+action. (Click on the pictures to see videos on YouTube.)
+
+Single axis inertial wheel pendulum (similar to the model we will use)
+
+Small desktop single axis inertial wheel pendulum
+
+Dual axis inertial wheel pendulum
+
+Triple axis inertial wheel pendulum (unlike the dual axis, this can also
+stabilize yaw) 
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Filling in the manipulator equations for our single-link pendulum,
+
+\[
+M \ddot{q} + C(q, \dot{q})\dot{q} = \tau_g(q) + Bu \\
+M = \left[ 
+\begin{array}{c c} 
+  m_1 l_1^2 + m_2 l_2^2 + I_1 + I_2 & I_2 \\
+  I_2 & I_2
+\end{array}
+\right]
+\ \ \ \ \ 
+C = \left[
+\begin{array}{c c}
+ 0 & 0 \\
+ 0 & 0
+\end{array}
+\right]\\
+\tau_g(q) = \left[
+\begin{array}{c}
+ -(m_1 l_1 + m_2 l_2) g sin(\theta_1) \\ 0
+\end{array}
+\right]
+\ \ \ \ \ 
+B = \left[
+\begin{array}{c}
+ 0 \\ 1
+\end{array}
+\right]
+\]
+
+\(\tau_g(q)\) should look familiar from the simple pendulum case. The
+effect of \(M\) is little trickier, as it includes some interaction
+terms between \(\theta_1\) and \(\theta_2\).
+\href{http://home.deib.polimi.it/gini/robot/docs/spong.pdf}{This
+textbook's} treatment of the double pendulum (which has fundamentally
+similar inertia) in Chapter 9 might be of use if you want to dig into
+this more thoroughly.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{3.1 Linearization (4 points, 4/4
+autograded)}\label{linearization-4-points-44-autograded}
+
+We're interested in stabilizing this system to its upright fixed point
+at \(\theta_1 = \pi\). Let's try using LQR to do this. As a first step,
+calculate the linearization of these dynamics -\/- that is, find
+functions \(A(x_f)\) and \(B(x_f)\) such that the linear system
+\(\dot x = A(x_f)*\bar{x} + B(x_f)*\bar{u}\), for \(\bar{x} = x-x_f\)
+and \(\bar{u} = u-u_f\), approximates our full system in the
+neighborhood of the fixed point \(x_f, u_f\). \textbf{Derive those here,
+and also fill out the corresponding function \(GetLinearizedDynamics\)
+of \emph{inertial\_wheel\_pendulum.py} to generate these.}
+
+    \begin{align}
+      {\bf A}_{lin} =& \begin{bmatrix} {0} & {I} \\ M^{-1} \frac{\partial \tau_g}{\partial q} + \sum_{j} M^{-1}\frac{\partial B_j}{\partial q} u_j  & {0} \end{bmatrix}_{x=x^*,u=u^*} \\
+      B_{lin} =& \begin{bmatrix} {0} \\ M^{-1} B
+        \end{bmatrix}_{x=x^*, u=u^*}
+      \end{align}
+
+\begin{align}
+{\bf A}_{lin} =&
+\begin{bmatrix} {0} & {I} \\ (M^{-1})_{.1} * -(m_1 l_1 + m_2 l_2) g \cos(\theta_1)& {0} \end{bmatrix}_{x=x^*,u=u^*} \\
+B_{lin} =& \begin{bmatrix}
+{0} \\
+M^{-1} B
+\end{bmatrix}_{x=x^*, u=u^*}
+\end{align}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{Quick check for
+understanding}\label{quick-check-for-understanding}
+
+\paragraph{We recommend you stop for a second to make sure you can
+answer the following
+questions:}\label{we-recommend-you-stop-for-a-second-to-make-sure-you-can-answer-the-following-questions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  What makes a system linear vs. nonlinear?
+\item
+  Are there edge cases where you are not sure if a system is nonlinear
+  or linear?
+\item
+  What does \(\dot{x} = f(x,u)\) usually mean? What does
+  \(\dot{x} = Ax + Bu\) usually mean?
+\item
+  Why would we linearize a system?
+\item
+  How would we determine when/where the linearization of the system is
+  "good"?
+\item
+  What are eigenvectors and how do they relate to robots?
+\end{enumerate}
+
+(We won't grade answers to these questions, but are happy to talk about
+your answers. Office hours are the best opportunities to discuss.)
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    Note: you can use any text editor you like to edit
+\texttt{inertial\_wheel\_pendulum.py} (vim, emacs, Sublime, Jupyter
+notebook's built-in editor, etc). It is just a file inside the
+\texttt{set\_3} folder. We are mounting it externally into the docker
+container. Just make sure you save \texttt{inertial\_wheel\_pendulum.py}
+before running the code cells below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{} These IPython\PYZhy{}specific commands}
+         \PY{c+c1}{\PYZsh{} tell the notebook to reload imported}
+         \PY{c+c1}{\PYZsh{} files every time you rerun code. So}
+         \PY{c+c1}{\PYZsh{} you can modify inertial\PYZus{}wheel\PYZus{}pendulum.py}
+         \PY{c+c1}{\PYZsh{} and then rerun this cell to see the changes.}
+         \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} autoreload
+         \PY{o}{\PYZpc{}}\PY{k}{autoreload} 2
+         
+         \PY{k+kn}{from} \PY{n+nn}{inertial\PYZus{}wheel\PYZus{}pendulum} \PY{k+kn}{import} \PY{o}{*}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         \PY{c+c1}{\PYZsh{} Make numpy printing prettier}
+         \PY{n}{np}\PY{o}{.}\PY{n}{set\PYZus{}printoptions}\PY{p}{(}\PY{n}{precision}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{suppress}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Define the upright fixed point here.}
+         \PY{n}{uf} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.}\PY{p}{]}\PY{p}{)}
+         \PY{n}{xf} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{math}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Pendulum params. You\PYZsq{}re free to play with these,}
+         \PY{c+c1}{\PYZsh{} of course, but we\PYZsq{}ll be expecting you to use the}
+         \PY{c+c1}{\PYZsh{} default values when answering questions, where}
+         \PY{c+c1}{\PYZsh{} varying these values might make a difference.}
+         \PY{n}{m1} \PY{o}{=} \PY{l+m+mf}{1.} \PY{c+c1}{\PYZsh{} Default 1}
+         \PY{n}{l1} \PY{o}{=} \PY{l+m+mf}{1.} \PY{c+c1}{\PYZsh{} Default 1}
+         \PY{n}{m2} \PY{o}{=} \PY{l+m+mf}{2.} \PY{c+c1}{\PYZsh{} Default 2}
+         \PY{n}{l2} \PY{o}{=} \PY{l+m+mf}{2.} \PY{c+c1}{\PYZsh{} Default 2}
+         \PY{n}{r} \PY{o}{=} \PY{l+m+mf}{1.0} \PY{c+c1}{\PYZsh{} Default 1}
+         \PY{n}{g} \PY{o}{=} \PY{l+m+mi}{10}  \PY{c+c1}{\PYZsh{} Default 10}
+         \PY{n}{input\PYZus{}max} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{pendulum\PYZus{}plant} \PY{o}{=} \PY{n}{InertialWheelPendulum}\PY{p}{(}
+             \PY{n}{m1} \PY{o}{=} \PY{n}{m1}\PY{p}{,} \PY{n}{l1} \PY{o}{=} \PY{n}{l1}\PY{p}{,} \PY{n}{m2} \PY{o}{=} \PY{n}{m2}\PY{p}{,} \PY{n}{l2} \PY{o}{=} \PY{n}{l2}\PY{p}{,} 
+             \PY{n}{r} \PY{o}{=} \PY{n}{r}\PY{p}{,} \PY{n}{g} \PY{o}{=} \PY{n}{g}\PY{p}{,} \PY{n}{input\PYZus{}max} \PY{o}{=} \PY{n}{input\PYZus{}max}\PY{p}{)}
+         
+         \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{Code submission for 3.1: }
+         \PY{l+s+sd}{Edit this method in `inertial\PYZus{}wheel\PYZus{}pendulum.py`}
+         \PY{l+s+sd}{and ensure it produces reasonable A and B}
+         \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{n}{A}\PY{p}{,} \PY{n}{B} \PY{o}{=} \PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{GetLinearizedDynamics}\PY{p}{(}\PY{n}{uf}\PY{p}{,} \PY{n}{xf}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{A}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{B}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The autoreload extension is already loaded. To reload it, use:
+  \%reload\_ext autoreload
+[[ 50.   0.]
+ [  0.   0.]]
+('A: ', array([[ 0.,  0.,  1.,  0.],
+       [ 0.,  0.,  0.,  1.],
+       [ 5.,  0.,  0.,  0.],
+       [-5.,  0.,  0.,  0.]]))
+('B: ', array([[ 0. ],
+       [ 0. ],
+       [-0.1],
+       [ 1.1]]))
+
+    \end{Verbatim}
+
+    \subsection{3.2 Controllability (3 points, 2/3
+autograded)}\label{controllability-3-points-23-autograded}
+
+\emph{Controllability} is an important propery of a linear system -\/-
+you can read about it in Chapter 3 of the textbook.
+
+\textbf{Write a function to test whether a linear system is
+controllable, using the function signature below.} (You'll probably want
+to do this in two steps: building the controllability matrix, and then
+checking its rank.)
+
+\textbf{Is the linearization around the upright controllable? How about
+the linearization around the fixed point at \(\theta = 0\)?}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}371}]:} \PY{k}{def} \PY{n+nf}{is\PYZus{}controllable}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{)}\PY{p}{:}
+              \PY{n}{n} \PY{o}{=} \PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              \PY{k}{assert} \PY{n}{n} \PY{o}{==} \PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+              \PY{n}{m} \PY{o}{=} \PY{n}{B}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+              
+              \PY{n}{cont} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{n}\PY{p}{,} \PY{n}{n}\PY{o}{*}\PY{n}{m}\PY{p}{)}\PY{p}{)}
+              \PY{n}{sub} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{cont}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{m}\PY{o}{*}\PY{n}{i}\PY{p}{:}\PY{n}{m}\PY{o}{*}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{sub}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{B}\PY{p}{)}
+                  \PY{n}{sub} \PY{o}{=} \PY{n}{sub}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{matrix\PYZus{}rank}\PY{p}{(}\PY{n}{cont}\PY{p}{)} \PY{o}{==} \PY{n}{n}
+          
+          \PY{c+c1}{\PYZsh{} Play around with using the function}
+          \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{A}
+          \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{B} 
+          \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Is controllable? }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{is\PYZus{}controllable}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+A:  [[ 0.  0.  1.  0.]
+ [ 0.  0.  0.  1.]
+ [ 5.  0.  0.  0.]
+ [-5.  0.  0.  0.]]
+B:  [[ 0. ]
+ [ 0. ]
+ [-0.1]
+ [ 1.1]]
+Is controllable?  True
+
+    \end{Verbatim}
+
+    \textbf{Short answer explanation for 3.2. Is the linearization around
+the upright controllable? How about the linearization around the fixed
+point at \(\theta = 0\)?}
+
+Yes, linearization around the upright fixed point is controllable (as
+expected), and likewise for the other fixed point at 0.
+
+    \subsection{3.3 LQR (4 points, 4/4
+autograded)}\label{lqr-4-points-44-autograded}
+
+Now that we have a linear system to control, let's try employing LQR to
+balance the inertial pendulum. Recalling LQR as discussed in class, you
+need to supply LQR with a couple things:
+
+\begin{itemize}
+\tightlist
+\item
+  Linear system matrices \(A\) and \(B\)
+\item
+  Symmetric positive semi-definite state cost matrix \(Q\)
+\item
+  Symmetric positive definitive input cost matrix \(R\)
+\item
+  Another cost matrix \(N\) for the off-diagonal terms. (For most of our
+  problems, this is set to zero.)
+\end{itemize}
+
+And it produces an optimal gain matrix \(K\) for the optimal controller
+\(\bar{u} = - K\bar{x}\) that minimizes
+
+\[\min_u \int_0^\infty \bar{x}'Q\bar{x} + \bar{u}'R\bar{u} + 2\bar{x}'N\bar{u} dt \]
+
+LQR also returns the cost-to-go matrix \(S\), with the optimal
+cost-to-go taking the form \(J(x) = \bar{x}^T S \bar{x}\).
+
+In this problem, we have a complication: we probably don't want to try
+to control the reaction wheel angle \(\theta_2\), as it has no impact on
+our dynamics. (Check the dynamics as derived above to see this
+yourself!) Your first instinct might be to set the 2nd row and column of
+\(Q\) to zero: but unfortunately, this doesn't work, as exemplified
+below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k+kn}{from} \PY{n+nn}{pydrake.all} \PY{k+kn}{import} \PY{n}{LinearQuadraticRegulator}
+         
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}lqr}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Q} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Not clear what these gains will do,}
+             \PY{c+c1}{\PYZsh{} but as long as Q is positive semidefinite}
+             \PY{c+c1}{\PYZsh{} this should find a solution.}
+             \PY{n}{Q} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{random}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+             \PY{n}{Q} \PY{o}{=} \PY{n}{Q}\PY{o}{.}\PY{n}{T} \PY{o}{+} \PY{n}{Q} \PY{c+c1}{\PYZsh{} make symmetric and thus psd}
+             \PY{n}{Q}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} Don\PYZsq{}t penalize reaction wheel angle at all}
+             \PY{n}{Q}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{R} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{]}
+             \PY{n}{K}\PY{p}{,} \PY{n}{S} \PY{o}{=} \PY{n}{LinearQuadraticRegulator}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{Q}\PY{p}{,} \PY{n}{R}\PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{K}\PY{p}{,} \PY{n}{S}\PY{p}{)}
+         
+         \PY{n}{K}\PY{p}{,} \PY{n}{S} \PY{o}{=} \PY{n}{create\PYZus{}lqr}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LQR K: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{K}
+         \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{isnan}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Oh no!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+LQR K:  [[ nan  nan  nan  nan]]
+Oh no!
+
+    \end{Verbatim}
+
+    In this case, the solution is underdetermined (the algebraic Riccati
+equation no longer has a \emph{unique} solution, but instead an infinite
+number of equally-good ones). Instead, because \(\theta_2\) never
+appears in the dynamics, you can form a modified linear system to give
+to LQR:
+
+\[\dot{x}_{reduced} = A_{reduced}x_{reduced} + B_{reduced}u_{reduced}\]
+
+where
+\(x_{reduced} = \left[\theta_1, \dot \theta_1, \dot \theta_2 \right]^T\),
+and insert zeros approximately to bring your final \(K\) and \(S\) back
+up to \(1 \times 4\) and \(4 \times 4\) matrices.
+
+\textbf{Do this state reduction, pick reasonable Q and R matrices,
+invoke LQR, and reverse your state reduction to generate K and S
+matrices.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{k+kn}{from} \PY{n+nn}{pydrake.all} \PY{k+kn}{import} \PY{p}{(}\PY{n}{BasicVector}\PY{p}{,} \PY{n}{DiagramBuilder}\PY{p}{,} \PY{n}{FloatingBaseType}\PY{p}{,}
+                                  \PY{n}{LinearQuadraticRegulator}\PY{p}{,} \PY{n}{RigidBodyPlant}\PY{p}{,}
+                                  \PY{n}{RigidBodyTree}\PY{p}{,} \PY{n}{Simulator}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}reduced\PYZus{}lqr}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Code submission for 3.3: Fill in the missing}
+         \PY{l+s+sd}{    details of this function to produce a control}
+         \PY{l+s+sd}{    matrix K, and cost\PYZhy{}to\PYZhy{}go matrix S, for the full}
+         \PY{l+s+sd}{    (4\PYZhy{}state) system.}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             
+             \PY{n}{Q} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+             \PY{n}{R} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.}\PY{p}{]}
+             \PY{n}{A1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{B1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{delete}\PY{p}{(}\PY{n}{B}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{K}\PY{p}{,} \PY{n}{S} \PY{o}{=} \PY{n}{LinearQuadraticRegulator}\PY{p}{(}\PY{n}{A1}\PY{p}{,} \PY{n}{B1}\PY{p}{,} \PY{n}{Q}\PY{p}{,} \PY{n}{R}\PY{p}{)}
+             
+             \PY{n}{K1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{K}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{S1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{S}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             \PY{n}{S1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{n}{S1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{values}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{A}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{K1}\PY{p}{,} \PY{n}{S1}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} Refer to create\PYZus{}lqr() to see how invocations}
+             \PY{c+c1}{\PYZsh{} to LinearQuadraticRegulator work.}
+             \PY{c+c1}{\PYZsh{} https://docs.scipy.org/doc/numpy/reference/generated/numpy.delete.html}
+             \PY{c+c1}{\PYZsh{} and }
+             \PY{c+c1}{\PYZsh{} https://docs.scipy.org/doc/numpy/reference/generated/numpy.insert.html}
+             \PY{c+c1}{\PYZsh{} might be useful for helping with the state reduction.}
+             
+             \PY{k}{return} \PY{p}{(}\PY{n}{K}\PY{p}{,} \PY{n}{S}\PY{p}{)}
+         
+         \PY{n}{K}\PY{p}{,} \PY{n}{S} \PY{o}{=} \PY{n}{create\PYZus{}reduced\PYZus{}lqr}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{)}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{K: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{K}
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{S: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{S}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+K:  [[-145.425    0.     -66.05    -1.   ]]
+S:  [[ 4753.172     0.     2180.804    66.05 ]
+ [    0.        0.        0.        0.   ]
+ [ 2180.804     0.     1001.43     30.994]
+ [   66.05      0.       30.994     1.909]]
+
+    \end{Verbatim}
+
+    \textbf{Finally, use this controller to stabilize the robot in
+simulation!}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}333}]:} \PY{k+kn}{from} \PY{n+nn}{inertial\PYZus{}wheel\PYZus{}pendulum} \PY{k+kn}{import} \PY{o}{*}
+          \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{HTML}
+          \PY{k+kn}{from} \PY{n+nn}{inertial\PYZus{}wheel\PYZus{}pendulum\PYZus{}visualizer} \PY{k+kn}{import} \PY{o}{*}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+          
+          \PY{k}{def} \PY{n+nf}{lqr\PYZus{}controller}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} This should return a 1x1 u that is bounded}
+              \PY{c+c1}{\PYZsh{} between \PYZhy{}input\PYZus{}max and input\PYZus{}max.}
+              \PY{c+c1}{\PYZsh{} Remember to wrap the angular values back to}
+              \PY{c+c1}{\PYZsh{} [\PYZhy{}pi, pi].}
+              \PY{n}{u} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+              \PY{k}{global} \PY{n}{xf}\PY{p}{,} \PY{n}{uf}\PY{p}{,} \PY{n}{K}
+              \PY{n}{x} \PY{o}{=} \PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{xf}    
+              \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{pi}
+              \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{pi}
+              \PY{n}{u} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{uf} \PY{o}{\PYZhy{}} \PY{n}{K}\PY{o}{.}\PY{n}{dot}\PY{p}{(} \PY{n}{x} \PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{input\PYZus{}max}\PY{p}{,} \PY{n}{input\PYZus{}max}\PY{p}{)}
+              
+              \PY{k}{return} \PY{n}{u}
+          
+          \PY{c+c1}{\PYZsh{} Run forward simulation from the specified initial condition}
+          \PY{n}{duration} \PY{o}{=} \PY{l+m+mf}{2.}
+          \PY{c+c1}{\PYZsh{}x0 = [3, 0.0, 0.0, 5.0]}
+          \PY{n}{x0} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{+}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{5.0}\PY{p}{]}
+          
+          \PY{n}{input\PYZus{}log}\PY{p}{,} \PY{n}{state\PYZus{}log} \PY{o}{=} \PYZbs{}
+              \PY{n}{RunSimulation}\PY{p}{(}\PY{n}{pendulum\PYZus{}plant}\PY{p}{,}
+                        \PY{n}{lqr\PYZus{}controller}\PY{p}{,}
+                        \PY{n}{x0}\PY{o}{=}\PY{n}{x0}\PY{p}{,}
+                        \PY{n}{duration}\PY{o}{=}\PY{n}{duration}\PY{p}{)}
+          
+              
+          \PY{c+c1}{\PYZsh{} Visualize state and input traces}
+          \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{state\PYZus{}log}\PY{o}{.}\PY{n}{sample\PYZus{}times}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{state\PYZus{}log}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x[}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{]}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{i}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{input\PYZus{}log}\PY{o}{.}\PY{n}{sample\PYZus{}times}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{input\PYZus{}log}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{u[0]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Visualize the simulation}
+          \PY{n}{viz} \PY{o}{=} \PY{n}{InertialWheelPendulumVisualizer}\PY{p}{(}\PY{n}{pendulum\PYZus{}plant}\PY{p}{)}
+          \PY{n}{ani} \PY{o}{=} \PY{n}{viz}\PY{o}{.}\PY{n}{animate}\PY{p}{(}\PY{n}{input\PYZus{}log}\PY{p}{,} \PY{n}{state\PYZus{}log}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{n}{viz}\PY{o}{.}\PY{n}{fig}\PY{p}{)}
+          \PY{n}{HTML}\PY{p}{(}\PY{n}{ani}\PY{o}{.}\PY{n}{to\PYZus{}html5\PYZus{}video}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}333}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{3.4 LQR Region of Attraction, Prologue (2 points, 2/2
+autograded)}\label{lqr-region-of-attraction-prologue-2-points-22-autograded}
+
+As you probably found when playing with the LQR simulation in the
+previous question, there are plenty of states for which the LQR doesn't
+converge. \textbf{Find an x0 from which LQR does \emph{not} converge,
+and an x0 from which is does, and write them below.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{Code submission for 3.4}
+         \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}x0\PYZus{}does\PYZus{}not\PYZus{}converge}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{]}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}x0\PYZus{}does\PYZus{}converge}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{p}{[}\PY{n}{math}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \subsection{3.5 LQR Region of Attraction, Episode 1 (5 points, 2/5
+autograded)}\label{lqr-region-of-attraction-episode-1-5-points-25-autograded}
+
+What we would like to know is when the LQR controller will work, and
+when it won't. Let's see if we can analyze the region of attraction of
+this controller using the tools of Lyapunov stability analysis.
+
+The closed-loop system dynamics of our system when using the LQR
+controller are
+
+\[ \dot{x} = f(x, -K(x-x_f)) \]
+
+A function that we know is a decent Lyapunov function near \(x_f\) is
+the cost-to-go of the LQR solution: \(V = \bar{x}^T S \bar{x}\).
+
+Following section
+\href{http://underactuated.csail.mit.edu/underactuated.html?chapter=lyapunov}{10.3
+of the textbook}, we just need to find a \(\rho\) such that
+
+\[ 
+\dot{V}(x) \prec 0, \ \ \  \forall x : V(x) > 0
+\]
+
+to demonstrate the running LQR on our full (nonlinear!) system from
+state \(x_0\) will converge as long as \(V(x_0) \leq \rho\).
+
+Let's start by calculating \(\dot{V}(x)\) and \(\dot{V}(x)\) for the
+full system. \textbf{Using the helper function \emph{evaluate\_f(x, u)}
+(it's a member of InertialWheelPendulum in
+\emph{inertial\_wheel\_pendulum.py}) to fill out \emph{calcV} and
+\emph{calcVdot} to do this.}
+
+Running this cell will populate the variables \emph{V\_samples},
+\emph{f\_samples}, and \emph{Vdot\_samples} in the plane where
+\(\theta_2 = 0\). Feel free to tweak those the sample grid (defined by
+n\_bins, theta\_widthm, etc) as you wish, but we'll be using these
+samples to estimate the region of attraction, so keep the resolution as
+high as you can while keeping the runtime reasonable. (We are,
+unfortunately, sampling in 3 dimensions...)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}334}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{time}
+          
+          \PY{c+c1}{\PYZsh{} Calculates the closed loop f(x) at xn}
+          \PY{k}{def} \PY{n+nf}{calcF}\PY{p}{(}\PY{n}{xn}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} Feel free to bring in whatever}
+              \PY{c+c1}{\PYZsh{} global variables you need, e.g.:}
+              \PY{n}{xn} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{xn}\PY{p}{)}
+              \PY{k}{global} \PY{n}{xf}
+              \PY{k}{global} \PY{n}{pendulum\PYZus{}plant}
+              \PY{k}{global} \PY{n}{K}
+              \PY{n}{xbar} \PY{o}{=} \PY{n}{xn} \PY{o}{\PYZhy{}} \PY{n}{xf}
+              \PY{n}{u} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{K}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{xbar}\PY{p}{)} \PY{o}{+} \PY{n}{uf}
+              \PY{k}{return} \PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{evaluate\PYZus{}f}\PY{p}{(}\PY{n}{u}\PY{p}{,} \PY{n}{xn}\PY{p}{,} \PY{n}{throw\PYZus{}when\PYZus{}limits\PYZus{}exceeded}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Calculates V(xn)}
+          \PY{k}{def} \PY{n+nf}{calcV}\PY{p}{(}\PY{n}{xn}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} Feel free to bring in whatever}
+              \PY{c+c1}{\PYZsh{} global variables you need}
+              \PY{k}{global} \PY{n}{K}\PY{p}{,} \PY{n}{S}
+              \PY{n}{xn}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{xn}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}
+              \PY{n}{xn}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{xn}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}
+              \PY{n}{xb} \PY{o}{=} \PY{n}{xn} \PY{o}{\PYZhy{}} \PY{n}{xf}
+              \PY{k}{return} \PY{n}{xb}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{xb}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Calculates \PYZbs{}dot\PYZob{}V\PYZcb{}(xn).}
+          \PY{k}{def} \PY{n+nf}{calcVdot}\PY{p}{(}\PY{n}{xn}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} Feel free to bring in whatever}
+              \PY{c+c1}{\PYZsh{} global variables you need}
+              \PY{k}{global} \PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{,} \PY{n}{Q}\PY{p}{,} \PY{n}{R}
+              \PY{k}{global} \PY{n}{K}\PY{p}{,} \PY{n}{S}
+              \PY{n}{xn}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{xn}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}
+              \PY{n}{xn}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{xn}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)}
+              \PY{n}{xb} \PY{o}{=} \PY{n}{xn} \PY{o}{\PYZhy{}} \PY{n}{xf}
+              \PY{k}{return} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{S}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{xb}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{calcF}\PY{p}{(}\PY{n}{xn}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Sample f, V, and Vdot over}
+          \PY{c+c1}{\PYZsh{} a grid defined by these parameters.}
+          \PY{c+c1}{\PYZsh{} (Odd numbers are good because there\PYZsq{}ll be}
+          \PY{c+c1}{\PYZsh{} a bin at exactly the origin.}
+          \PY{c+c1}{\PYZsh{} These are slightly strange numbers as we\PYZsq{}ve}
+          \PY{c+c1}{\PYZsh{} tried to default these to something as small}
+          \PY{c+c1}{\PYZsh{} as possible while still giving reasonable results.}
+          \PY{c+c1}{\PYZsh{} Feel free to increase if your computer and patience}
+          \PY{c+c1}{\PYZsh{} can handle it.)}
+          \PY{n}{n\PYZus{}bins} \PY{o}{=} \PY{l+m+mi}{41}
+          \PY{n}{n\PYZus{}bins\PYZus{}theta2d} \PY{o}{=} \PY{l+m+mi}{7}
+          \PY{c+c1}{\PYZsh{} For theta and thetad, we only need to span}
+          \PY{c+c1}{\PYZsh{} a small region around the fixed point}
+          \PY{n}{theta\PYZus{}width} \PY{o}{=} \PY{l+m+mi}{4}
+          \PY{n}{thetad\PYZus{}width} \PY{o}{=} \PY{l+m+mi}{4}
+          \PY{c+c1}{\PYZsh{} For \PYZbs{}dot\PYZob{}theta\PYZus{}2\PYZcb{}, though, the default}
+          \PY{c+c1}{\PYZsh{} parameters for our pendulum lead us to}
+          \PY{c+c1}{\PYZsh{} need to search larger absolute \PYZbs{}dot\PYZob{}theta\PYZus{}2\PYZcb{}}
+          \PY{c+c1}{\PYZsh{} values (because the inertial wheel is relatively}
+          \PY{c+c1}{\PYZsh{} light).}
+          \PY{n}{theta2d\PYZus{}width} \PY{o}{=} \PY{l+m+mi}{50}
+          
+          \PY{c+c1}{\PYZsh{} Do the actual sampling....}
+          \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{xf}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{theta\PYZus{}width}\PY{p}{,} \PY{n}{xf}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{+}\PY{n}{theta\PYZus{}width}\PY{p}{,} \PY{n}{n\PYZus{}bins}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{xf}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{thetad\PYZus{}width}\PY{p}{,} \PY{n}{xf}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{+}\PY{n}{thetad\PYZus{}width}\PY{p}{,} \PY{n}{n\PYZus{}bins}\PY{p}{)}
+          \PY{n}{z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{xf}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{theta2d\PYZus{}width}\PY{p}{,} \PY{n}{xf}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{+}\PY{n}{theta2d\PYZus{}width}\PY{p}{,} \PY{n}{n\PYZus{}bins\PYZus{}theta2d}\PY{p}{)}
+          \PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{Z} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{z}\PY{p}{,} \PY{n}{indexing}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ij}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{calc\PYZus{}over\PYZus{}array}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{[}\PY{n}{f}\PY{p}{(}\PY{p}{[}\PY{n}{dx}\PY{p}{,} \PY{l+m+mf}{0.}\PY{p}{,} \PY{n}{dy}\PY{p}{,} \PY{n}{dz}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{dz} \PY{o+ow}{in} \PY{n}{z}\PY{p}{]} \PY{k}{for} \PY{n}{dx} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]} \PY{k}{for} \PY{n}{dy} \PY{o+ow}{in} \PY{n}{y}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{V\PYZus{}samples} \PY{o}{=} \PY{n}{calc\PYZus{}over\PYZus{}array}\PY{p}{(}\PY{n}{calcV}\PY{p}{)}
+          \PY{n}{f\PYZus{}samples} \PY{o}{=} \PY{n}{calc\PYZus{}over\PYZus{}array}\PY{p}{(}\PY{n}{calcF}\PY{p}{)}
+          \PY{n}{Vdot\PYZus{}samples} \PY{o}{=} \PY{n}{calc\PYZus{}over\PYZus{}array}\PY{p}{(}\PY{n}{calcVdot}\PY{p}{)}
+          
+          \PY{n}{elapsed} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}time}
+          \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Computed }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ x }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ x }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{ sampling in }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{ seconds}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{p}{(}\PY{n}{n\PYZus{}bins}\PY{p}{,} \PY{n}{n\PYZus{}bins}\PY{p}{,} \PY{n}{n\PYZus{}bins\PYZus{}theta2d}\PY{p}{,} \PY{n}{elapsed}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Computed 41 x 41 x 7 sampling in 1.081795 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}335}]:} \PY{c+c1}{\PYZsh{} This cell plots the samples using color\PYZhy{}coded plots.}
+          \PY{c+c1}{\PYZsh{} Color coding:}
+          \PY{c+c1}{\PYZsh{}   V: blue = low\PYZhy{}value, red = high\PYZhy{}value}
+          \PY{c+c1}{\PYZsh{}   Vdot: blue = low value, yellow = around 0, red = high value}
+          \PY{c+c1}{\PYZsh{} The plot of Vdot is overlayed with a quiver plot of the samples}
+          \PY{c+c1}{\PYZsh{} of f.}
+          
+          \PY{c+c1}{\PYZsh{} Select with slice of \PYZbs{}dot\PYZob{}theta\PYZus{}2\PYZcb{} we\PYZsq{}ll}
+          \PY{c+c1}{\PYZsh{} plot... this slice should be close to 0,}
+          \PY{c+c1}{\PYZsh{} as it\PYZsq{}s the middle bin.}
+          \PY{n}{theta2d\PYZus{}plotting\PYZus{}slice} \PY{o}{=} \PY{n}{n\PYZus{}bins\PYZus{}theta2d} \PY{o}{/} \PY{l+m+mi}{2}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Plot V}
+          \PY{n}{Xplot}\PY{p}{,} \PY{n}{Yplot} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{pcolormesh}\PY{p}{(}\PY{n}{Xplot}\PY{p}{,} \PY{n}{Yplot}\PY{p}{,} \PY{n}{V\PYZus{}samples}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{n}{theta2d\PYZus{}plotting\PYZus{}slice}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{V(x) at dtheta\PYZus{}2 = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{z}\PY{p}{[}\PY{n}{theta2d\PYZus{}plotting\PYZus{}slice}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{theta\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dtheta\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Plot Vdot}
+          \PY{c+c1}{\PYZsh{} Use a sigmoid to try to squash the huge range of Vdot}
+          \PY{c+c1}{\PYZsh{} into something more visually appealing.}
+          \PY{k}{def} \PY{n+nf}{sigmoid}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{o}{/}\PY{l+m+mf}{1000.}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{Vdot\PYZus{}viz} \PY{o}{=} \PY{n}{sigmoid}\PY{p}{(}\PY{n}{Vdot\PYZus{}samples}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{n}{theta2d\PYZus{}plotting\PYZus{}slice}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{pcolormesh}\PY{p}{(}\PY{n}{Xplot}\PY{p}{,} \PY{n}{Yplot}\PY{p}{,} \PY{n}{Vdot\PYZus{}viz}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vdot(x) overlaid with phase diagram f(x) at dtheta\PYZus{}2 = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{z}\PY{p}{[}\PY{n}{theta2d\PYZus{}plotting\PYZus{}slice}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{theta\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dtheta\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Don\PYZsq{}t plot a quiver arrow at *every* point, but instead}
+          \PY{c+c1}{\PYZsh{} every ds points}
+          \PY{c+c1}{\PYZsh{} (lower = more quiver arrows)}
+          \PY{n}{ds} \PY{o}{=} \PY{l+m+mi}{3}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{quiver}\PY{p}{(}\PY{n}{Xplot}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{n}{ds}\PY{p}{,} \PY{p}{:}\PY{p}{:}\PY{n}{ds}\PY{p}{]}\PY{p}{,} 
+                     \PY{n}{Yplot}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{n}{ds}\PY{p}{,} \PY{p}{:}\PY{p}{:}\PY{n}{ds}\PY{p}{]}\PY{p}{,} 
+                     \PY{n}{f\PYZus{}samples}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{n}{ds}\PY{p}{,} \PY{p}{:}\PY{p}{:}\PY{n}{ds}\PY{p}{,} 
+                     \PY{n}{theta2d\PYZus{}plotting\PYZus{}slice}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{f\PYZus{}samples}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{n}{ds}\PY{p}{,} \PY{p}{:}\PY{p}{:}\PY{n}{ds}\PY{p}{,} \PY{n}{theta2d\PYZus{}plotting\PYZus{}slice}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{3.6 LQR Region of Attraction, Episode 2 (6 points, 3/6
+autograded)}\label{lqr-region-of-attraction-episode-2-6-points-36-autograded}
+
+Now you should have access to (many samples from) your candidate \(V\)
+and \(\dot{V}\). One approach you could use from here is to estimate the
+region of attraction from these samples. Let's do that -\/- \textbf{use
+Theorem 10.5 from the textbook to estimate the largest region of
+attraction that you can for the LQR controller you derived above -\/-
+that is, find the biggest value of \(\rho\) such that at every point
+\(x_i\) where \(V(x_i) \leq \rho\), \(\dot{V}(x_i) \prec 0\).}
+
+(Hint: it'll be easiest to do this by finding counterexample -\/- e.g.,
+the point \(x_i\) with the smallest \(V(x_i)\) where
+\(\dot{V}(x_i) \geq 0\).)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}336}]:} \PY{k}{def} \PY{n+nf}{estimate\PYZus{}rho}\PY{p}{(}\PY{n}{V}\PY{p}{,} \PY{n}{Vdot}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+sd}{    Code submission for 3.6}
+          \PY{l+s+sd}{    Fill in this function to use the samples of V and Vdot}
+          \PY{l+s+sd}{    (Each array has dimension [n\PYZus{}bins, n\PYZus{}bins, n\PYZus{}bins\PYZus{}theta2d])}
+          \PY{l+s+sd}{    to compute a maximal rho indicating the region of attraction}
+          \PY{l+s+sd}{    of the fixed point at the upright.}
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{V}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{Vdot} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{V} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{V}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{logical\PYZus{}and}\PY{p}{(}\PY{n}{Vdot} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{V} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{a}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{k}{return} \PY{n}{x}
+          
+          \PY{n}{rho} \PY{o}{=} \PY{n}{estimate\PYZus{}rho}\PY{p}{(}\PY{n}{V\PYZus{}samples}\PY{p}{,} \PY{n}{Vdot\PYZus{}samples}\PY{p}{)}
+          \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Region of attraction estimated at V(x) \PYZlt{}= }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{rho}
+          
+          \PY{c+c1}{\PYZsh{} Plot Vdot again, but overlay the region of attraction \PYZhy{}\PYZhy{} which,}
+          \PY{c+c1}{\PYZsh{} for quadratic V, is an ellipse.}
+          \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{pcolormesh}\PY{p}{(}\PY{n}{Xplot}\PY{p}{,} \PY{n}{Yplot}\PY{p}{,} \PY{n}{Vdot\PYZus{}viz}\PY{p}{,} \PY{n}{vmin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} The part of S we care about is the 2x2 submatrix from the 1st and 3rd rows}
+          \PY{c+c1}{\PYZsh{} and columns.}
+          \PY{n}{S\PYZus{}sub} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{S}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Extract its eigenvalues and eigenvectors, which tell us}
+          \PY{c+c1}{\PYZsh{} the axes of the ellipse}
+          \PY{n}{ellipseInfo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{eig}\PY{p}{(}\PY{n}{S\PYZus{}sub}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} Eigenvalues are 1/r\PYZca{}2, Eigenvectors are axis directions}
+          \PY{n}{axis\PYZus{}1} \PY{o}{=} \PY{n}{ellipseInfo}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+          \PY{k}{if} \PY{n}{ellipseInfo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{ellipseInfo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+              \PY{n}{r1} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{rho}\PY{p}{)}\PY{o}{/}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{ellipseInfo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+              \PY{n}{axis\PYZus{}2} \PY{o}{=} \PY{n}{ellipseInfo}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+              \PY{n}{r2} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{rho}\PY{p}{)}\PY{o}{/}\PY{n}{math}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{ellipseInfo}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+              \PY{n}{angle} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{atan2}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{axis\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{axis\PYZus{}1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+              \PY{k+kn}{from} \PY{n+nn}{matplotlib.patches} \PY{k+kn}{import} \PY{n}{Ellipse}
+              \PY{n}{ax}\PY{o}{.}\PY{n}{add\PYZus{}patch}\PY{p}{(}\PY{n}{Ellipse}\PY{p}{(}\PY{p}{(}\PY{n}{xf}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{xf}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,} 
+                                   \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{r1}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{r2}\PY{p}{,} 
+                                   \PY{n}{angle}\PY{o}{=}\PY{n}{angle}\PY{o}{*}\PY{l+m+mf}{180.}\PY{o}{/}\PY{n}{math}\PY{o}{.}\PY{n}{pi}\PY{p}{,} 
+                                   \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{fill}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{,} \PY{n}{zorder}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+              
+              \PY{c+c1}{\PYZsh{} Report an interesting number that is easy to compute}
+              \PY{c+c1}{\PYZsh{} from the ellipse info}
+              \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area of your region of attraction: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{math}\PY{o}{.}\PY{n}{pi} \PY{o}{*} \PY{n}{r1} \PY{o}{*} \PY{n}{r2}
+          \PY{k}{else}\PY{p}{:}
+              \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{S\PYZus{}sub had nonpositive eigenvalues. That shouldn}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{t happen.}\PY{l+s+s2}{\PYZdq{}}
+              
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vdot(x) overlaid with estimated ROA at dtheta\PYZus{}2 = }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{z}\PY{p}{[}\PY{n}{theta2d\PYZus{}plotting\PYZus{}slice}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{theta\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dtheta\PYZus{}1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Region of attraction estimated at V(x) <=  1.42696950421
+Area of your region of attraction:  0.0703475988692
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{3.7 LQR Region of Attraction, Intermission (3
+points)}\label{lqr-region-of-attraction-intermission-3-points}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  Is this sufficient proof that LQR \emph{would} work starting from
+  \(x_0\) \emph{inside} region of attraction (ignoring sampling errors)?
+\item
+  What about the opposite -\/- is this sufficient proof that LQR
+  \emph{would not} work starting from \(x_0\) \emph{outside} of this
+  region of attraction?
+\item
+  If you answer to (2) is No, speculate what strategies we could use to
+  find larger regions of attraction. (For example, could changing V
+  increase the largest ROA we could guarantee? How could we formulate
+  search over V?)
+\end{enumerate}
+
+    \textbf{Short answer explanation for 3.7}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  If you are in the region of attraction (assuming that you correctly
+  sampled/etc), your Lyaponov analysis guarantees that LQR will work.
+\item
+  No, your region of attraction does not guarantee that outside of it,
+  it will not work (you could've picked a too-conservative V).
+\item
+  Yes, we could change V. We could for instance imagine doing a search
+  over all SOS functions (ensuring positivity), persuant to relevant
+  conditions in our problem (such as the negative gradient), that
+  maximizes the region that has a negative gradient.
+\end{enumerate}
+
+    \subsection{3.8 Combined Swing-up and Stabilization (8 points, 4/8
+autograded)}\label{combined-swing-up-and-stabilization-8-points-48-autograded}
+
+Finally, we're ready for the main event! \textbf{Write a controller that
+will accomplish the task of swinging up the inertial pendulum to its
+upright fixed point from any initial condition. Your controller should
+use a custom swingup controller to get close to the unstable fixed
+point, and then switch to LQR to stay there. Use your estimated region
+of attraction to decide when it's safe to switch to LQR. A framework for
+setting up this hybrid controller is provided below for your
+convenience.}
+
+To accomplish swing-up, apply energy shaping to \(\theta\) via
+non-collocated feedback linearization. (Energy shaping for \(\theta\)
+should follow from the simple pendulum, so you just need figure out how
+to use your non-collocated input \(\tau\) to directly apply torque on
+\(\theta\).)
+
+While we'll look at your code, we'll also rely on the autograder to test
+your system from a variety of initial conditions. (You can try the
+autograder with the cell at the bottom of the notebook.) Besides the
+random initial conditions we'll test, we'll also check: - \$x =
+\left[ 0, 0, 0, 0 \right] \$ - \$x = \left[ \pi, 0, 0, 0 \right] \$ -
+\$x = \left[ 3\pi, 0, 0, 0 \right] \$ - \$x =
+\left[ 0, -100, 0, 0 \right] \$ - \$x = \left[ 0, 0, 0, 20 \right] \$
+
+Make sure you can handle these corner cases!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}395}]:} \PY{c+c1}{\PYZsh{} The swingup controller should accept a state x,}
+          \PY{c+c1}{\PYZsh{} and return a control input u (a 1x1 numpy array)}
+          \PY{c+c1}{\PYZsh{} that respects the plant\PYZsq{}s input limits.}
+          
+          \PY{k}{def} \PY{n+nf}{swingup\PYZus{}controller}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} Here\PYZsq{}s some useful things...}
+              \PY{n}{q} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+              \PY{n}{qd} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{4}\PY{p}{]}
+              \PY{p}{(}\PY{n}{M}\PY{p}{,} \PY{n}{C}\PY{p}{,} \PY{n}{tauG}\PY{p}{,} \PY{n}{B}\PY{p}{)} \PY{o}{=} \PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{GetManipulatorDynamics}\PY{p}{(}\PY{n}{q}\PY{p}{,} \PY{n}{qd}\PY{p}{)}
+              
+              \PY{n}{wheelKinetic} \PY{o}{=} \PY{n}{M}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{qd}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{qd}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+              \PY{n}{armKinetic} \PY{o}{=} \PY{n}{M}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{qd}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*}  \PY{n}{qd}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+              
+              \PY{n}{potential} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{m1}\PY{o}{*}\PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{l1} \PY{o}{+} \PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{m2}\PY{o}{*}\PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{l2}\PY{p}{)}\PY{o}{*}\PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{g}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{qd}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} If close to the top, attempt LQR if wheel slow enough, or slow down wheel}
+              \PY{n}{eps} \PY{o}{=} \PY{l+m+mf}{0.22}
+              \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{p}{(}\PY{n}{q}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{eps} \PY{o+ow}{or} \PY{n+nb}{abs}\PY{p}{(}\PY{p}{(}\PY{n}{q}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZpc{}} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{eps}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{wheelKinetic} \PY{o}{\PYZgt{}} \PY{l+m+mi}{80}\PY{p}{:}
+                      \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{qd}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{input\PYZus{}max}\PY{p}{,} \PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{input\PYZus{}max}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{k}{return} \PY{n}{lqr\PYZus{}controller}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} Decrease wheel kinetic energy to be reasonable}
+              \PY{k}{if} \PY{n}{wheelKinetic} \PY{o}{\PYZgt{}} \PY{l+m+mi}{30}\PY{p}{:}
+                  \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{qd}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{input\PYZus{}max}\PY{p}{,} \PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{input\PYZus{}max}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} Decrease energy of the swing to just make us reach the top}
+              \PY{k}{elif} \PY{n}{armKinetic} \PY{o}{+} \PY{n}{potential} \PY{o}{\PYZgt{}} \PY{l+m+mi}{175}\PY{p}{:}
+                  \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{qd}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{l+m+mi}{100} \PY{o}{+} \PY{n}{tauG}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{input\PYZus{}max}\PY{p}{,} \PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{input\PYZus{}max}\PY{p}{)}    
+              
+              \PY{c+c1}{\PYZsh{}Force a swing to get energy}
+              \PY{k}{if} \PY{p}{(}\PY{n}{qd}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{p}{:}
+                  \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{input\PYZus{}max}\PY{p}{]}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{o}{+}\PY{n}{pendulum\PYZus{}plant}\PY{o}{.}\PY{n}{input\PYZus{}max}\PY{p}{]}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{combined\PYZus{}controller}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{} }
+          \PY{l+s+sd}{    Code response for problem 3.8:}
+          \PY{l+s+sd}{    Fill in this combined controller to dispatch to either the}
+          \PY{l+s+sd}{    swingup or lqr controller by checking the state against your}
+          \PY{l+s+sd}{    calculated region of attraction.}
+          \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+              \PY{k}{if} \PY{n}{calcV}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{n}{rho}\PY{p}{:}
+                  \PY{k}{return} \PY{n}{lqr\PYZus{}controller}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{k}{return} \PY{n}{swingup\PYZus{}controller}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Simulate!}
+          \PY{c+c1}{\PYZsh{}x0 = [2.0, 0.0, 30, 0.]}
+          \PY{n}{x0} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}x0 = [2.0, 10.0, \PYZhy{}0.5, 0]}
+          \PY{c+c1}{\PYZsh{}x0 = [2.0, 0.0, \PYZhy{}0.5, \PYZhy{}100.]}
+          \PY{c+c1}{\PYZsh{}x0 = [2.0, 0.0, \PYZhy{}0.5, 100.]}
+          \PY{c+c1}{\PYZsh{}x0 = [0.0, 0.0, 0.0, 0.]}
+          \PY{c+c1}{\PYZsh{}x0 = [np.pi, 0, 0, 0]}
+          \PY{c+c1}{\PYZsh{}x0 = [3*np.pi, 0, 0, 0]}
+          \PY{c+c1}{\PYZsh{}x0 = [0, \PYZhy{}100, 0, 0]}
+          \PY{c+c1}{\PYZsh{}x0 = [0, 0, 0, 20]}
+          
+          \PY{n}{duration} \PY{o}{=} \PY{l+m+mi}{50}
+          \PY{n}{input\PYZus{}log}\PY{p}{,} \PY{n}{state\PYZus{}log} \PY{o}{=} \PY{n}{RunSimulation}\PY{p}{(}\PY{n}{pendulum\PYZus{}plant}\PY{p}{,}
+                                  \PY{n}{combined\PYZus{}controller}\PY{p}{,}
+                                  \PY{n}{x0} \PY{o}{=} \PY{n}{x0}\PY{p}{,}
+                                  \PY{n}{duration} \PY{o}{=} \PY{n}{duration}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Plot traces of the results}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+          \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+          \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{state\PYZus{}log}\PY{o}{.}\PY{n}{sample\PYZus{}times}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{state\PYZus{}log}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x[}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s2}{]}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n}{i}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{input\PYZus{}log}\PY{o}{.}\PY{n}{sample\PYZus{}times}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{input\PYZus{}log}\PY{o}{.}\PY{n}{data}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{u[0]}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}377}]:} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{pinv}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}377}]:} array([[ 0.],
+                 [ 1.]])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}363}]:} \PY{k+kn}{from} \PY{n+nn}{IPython.display} \PY{k+kn}{import} \PY{n}{HTML}
+          \PY{k+kn}{from} \PY{n+nn}{inertial\PYZus{}wheel\PYZus{}pendulum\PYZus{}visualizer} \PY{k+kn}{import} \PY{o}{*}
+          
+          \PY{n}{viz} \PY{o}{=} \PY{n}{InertialWheelPendulumVisualizer}\PY{p}{(}\PY{n}{pendulum\PYZus{}plant}\PY{p}{)}
+          \PY{n}{ani} \PY{o}{=} \PY{n}{viz}\PY{o}{.}\PY{n}{animate}\PY{p}{(}\PY{n}{input\PYZus{}log}\PY{p}{,} \PY{n}{state\PYZus{}log}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{,} \PY{n}{repeat}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{close}\PY{p}{(}\PY{n}{viz}\PY{o}{.}\PY{n}{fig}\PY{p}{)}
+          \PY{n}{HTML}\PY{p}{(}\PY{n}{ani}\PY{o}{.}\PY{n}{to\PYZus{}html5\PYZus{}video}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}363}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \subsection{Test your own
+implementations}\label{test-your-own-implementations}
+
+Running the cell below will run your implemented functions against unit
+tests.
+
+Don't change the cell below, or the test\_set\_3.py file. We will grade
+your implementations against the original files.
+
+Make sure to SAVE your notebook before running tests. (File
+-\/-\textgreater{} Save and Checkpoint, or use the hotkey which should
+be ctrl+s on linux, cmd+s on osx, etc)
+
+\textbf{Warning: these take a little while to run, so run them
+sparingly!} (They test your code by testing the inertial pendulum from
+lots of initial conditions...) You can speed it up a little by
+decreasing the time it takes to run every part of the notebook (e.g.
+sample V less frequently in 3.5, simulate plants for a shorter
+duration.)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}396}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+          \PY{c+c1}{\PYZsh{} Run the test in a subprocess, to make sure it doesn\PYZsq{}t open any plots...}
+          \PY{n}{os}\PY{o}{.}\PY{n}{popen}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{python test\PYZus{}set\PYZus{}3.py ./ test\PYZus{}results.json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Print the results json for review}
+          \PY{k+kn}{import} \PY{n+nn}{test\PYZus{}set\PYZus{}3}
+          \PY{k}{print} \PY{n}{test\PYZus{}set\PYZus{}3}\PY{o}{.}\PY{n}{pretty\PYZus{}format\PYZus{}json\PYZus{}results}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}results.json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Problem 2\_1: Finding Q: 4.00/4.00.
+
+Test Problem 3\_1: Linearization, A matrix: 2.00/2.00.
+  * [[ 50.   0.]  [  0.   0.]]
+
+Test Problem 3\_1: Linearization, B matrix: 2.00/2.00.
+  * [[ 50.   0.]  [  0.   0.]]
+
+Test Problem 3.2: Controllability: 2.00/2.00.
+  * [[ 50.   0.]  [  0.   0.]] [[-50.   0.]  [  0.   0.]]
+
+Test Problem 3.3: LQR: 4.00/4.00.
+  * [[ 50.   0.]  [  0.   0.]]
+
+Test Problem 3.4: LQR ROA, Prologue: 2.00/2.00.
+
+Test Problem 3.5: LQR ROA, Evaluating F, V, and Vdot: 2.00/2.00.
+
+Test Problem 3.6: LQR ROA, Numerical estimate of the ROA: 3.00/3.00.
+
+Test Problem 3.8: Combined Swing-Up and Stabilization: 4.00/4.00.
+
+TOTAL SCORE (automated tests only): 25.00/25.00
+
+
+    \end{Verbatim}
+
+    \subsection{Feedback Survey}\label{feedback-survey}
+
+We'd really appreciate your feedback on this set, and on the class so
+far! Anonymous survey
+\href{https://goo.gl/forms/gSqeSnMdY8WHeCiC2}{available here}.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

@@ -1,0 +1,57 @@
+{
+    "execution_time": "18.72", 
+    "tests": [
+        {
+            "score": 4, 
+            "max_score": 4, 
+            "name": "Problem 2_1: Finding Q"
+        }, 
+        {
+            "output": "[[ 50.   0.]\n [  0.   0.]]\n", 
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3_1: Linearization, A matrix"
+        }, 
+        {
+            "output": "[[ 50.   0.]\n [  0.   0.]]\n", 
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3_1: Linearization, B matrix"
+        }, 
+        {
+            "output": "[[ 50.   0.]\n [  0.   0.]]\n[[-50.   0.]\n [  0.   0.]]\n", 
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3.2: Controllability"
+        }, 
+        {
+            "output": "[[ 50.   0.]\n [  0.   0.]]\n", 
+            "score": 4, 
+            "max_score": 4, 
+            "name": "Problem 3.3: LQR"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3.4: LQR ROA, Prologue"
+        }, 
+        {
+            "score": 2, 
+            "max_score": 2, 
+            "name": "Problem 3.5: LQR ROA, Evaluating F, V, and Vdot"
+        }, 
+        {
+            "score": 3, 
+            "max_score": 3, 
+            "name": "Problem 3.6: LQR ROA, Numerical estimate of the ROA"
+        }, 
+        {
+            "score": 4, 
+            "max_score": 4, 
+            "name": "Problem 3.8: Combined Swing-Up and Stabilization"
+        }
+    ], 
+    "score": 25, 
+    "visibility": "visible", 
+    "leaderboard": []
+}

@@ -1,0 +1,1324 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{set\_2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{6.832: Problem Set \#2}\label{problem-set-2}
+
+Due on Wednesday, February 28, 2018 at 17:00. See course website for
+submission details. Use Drake release tag \texttt{drake-20180220}, i.e.
+use this notebook via
+\texttt{./docker\_run\_notebook.sh\ drake-20180220\ .}, or whichever
+script you need for your platform.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    Name: Billy Moses
+
+Collaborator(s): Andres Erbstein
+
+    \subsection{About this problem set}\label{about-this-problem-set}
+
+This problem set will entirely live inside this jupyter notebook.
+
+Grades will be assigned based on three components:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Manually graded free-response questions} -\/- the TAs will
+  manually assign grades to your answers to short answer responses. You
+  can write inline responses using
+  \href{https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet}{Markdown}
+  with inline LaTeX -\/- double-click on any problem writeup to see some
+  examples. Double-click response areas to edit them, and press
+  Control-Enter to finish editing them.
+\item
+  \textbf{Automated code testing} -\/- we will run automated tests
+  against specific functions (see more details when we introduce the
+  first coding test).
+\item
+  \textbf{Quick code review} -\/- we will perform a quick manual check
+  to make sure you have actually implemented the functions correctly (as
+  opposed to hacked the unit tests to pass!).
+\end{itemize}
+
+The automated coding tests are pretty small in this problem set, but we
+are planning to move more towards this framework in the next three
+problem sets. We would love to hear feedback from you on how this
+testing setup works.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+    \section{1. Cost Functions}\label{cost-functions}
+
+In this problem we will explore how to design cost functions that make
+the robot exhibit the kind of behavior we want. For this, we will
+consider the Dubins car model, which is a very simple model of a vehicle
+given by the following equations:
+
+\[
+{\bf{x}} = \left[ \begin{array}{c}
+x \\
+y \\
+\psi \end{array} \right],
+\ \ \ \ \ \ 
+\dot{{\bf{x}}} = f({\bf{x}},u) = \left[ \begin{array}{c}
+\dot x \\
+\dot y \\
+\dot \psi \end{array} \right] = \left[ \begin{array}{c} - \sin \psi \\
+\cos \psi \\
+u \end{array} \right],
+\]
+
+where \(\bf{x}\) is the state of the system and consists of the states
+\(x\) (the x-position), \(y\) (the y-position) and \(\psi\) (the yaw
+angle of the vehicle).
+
+The only control input is the steering angle \(u\), which directly
+controls \(\dot{\psi}\), while the car drives at constant velocity. (At
+\(\psi=0\), the vehicle drives in the \(+y\) direction.) \(u\) has
+limits \([-u_{max}, +u_{max}]\).
+
+Note that this is a very simple model -\/- it does not follow Newtonian
+physics, and can instead just instantaneously choose its yaw rate. It is
+however a simple model that has seen some use for actual robot research,
+for both UAVs and cars.
+\href{https://scholar.google.com/scholar?hl=en\&as_sdt=0\%2C22\&q=dubins+path+planning\&btnG=}{For
+example, here's some relevant results on Google Scholar.} To give us a
+little visual, here's a figure from a paper that uses a Dubins model for
+a 2D UAV in an environment with obstacles
+\href{http://groups.csail.mit.edu/robotics-center/public_papers/Barry12.pdf}{Barry
+et al., 2012}:
+
+Figure: A dubins vehicle, navigating amonst polygonal obstacles.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Question 1.1 (2 points)}\label{question-1.1-2-points}
+
+In general it is useful to have cost functions that penalize both the
+states along a trajectory, and also the final state:
+
+\[
+J = {\bf{x}}(t_f)^T Q_f {\bf{x}}(t_f) + \int_0^{t_f} g({\bf{x}} (t),{\bf{u}} (t)) \ dt 
+\]
+
+In this question let's look only at cost functions that only involve the
+final state. A simple form for a cost function that penalizes only the
+final state of the robot is
+
+\[
+J = {\bf{x}}(t_f)^T Q_f {\bf{x}}(t_f)
+\]
+
+where \(t_f\) is the final time and \(Q_f\) is a symmetric positive
+semidefinite matrix of the appropriate size. Suppose we want the robot
+to end up with its yaw angle close to 0, but do not care about the final
+\(x\) and \(y\) positions. What should we choose \(Q_f\) to be (remember
+to make sure it is symmetric and positive semidefinite)?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{Autograded answer for 1.1}
+        
+        \PY{l+s+sd}{Please implement this function so that the return argument }
+        \PY{l+s+sd}{satisfies the specification above.}
+        
+        \PY{l+s+sd}{Scroll to the end of the notebook to execute all tests for this notebook.}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}Q\PYZus{}f\PYZus{}problem\PYZus{}1\PYZus{}1}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{Qf} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+            \PY{n}{Qf}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{return} \PY{n}{Qf}
+        
+        \PY{k}{print} \PY{n}{get\PYZus{}Q\PYZus{}f\PYZus{}problem\PYZus{}1\PYZus{}1}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[0. 0. 0.]
+ [0. 0. 0.]
+ [0. 0. 1.]]
+
+    \end{Verbatim}
+
+    \paragraph{\texorpdfstring{Short answer explanation for 1.1. Provide a
+brief justification of your choice of \(Q_f\) in this
+cell.}{Short answer explanation for 1.1. Provide a brief justification of your choice of Q\_f in this cell.}}\label{short-answer-explanation-for-1.1.-provide-a-brief-justification-of-your-choice-of-q_f-in-this-cell.}
+
+If we want a nonzero final yaw (and don't care about anything else), we
+simply give an error proportional to yaw (which is the 2nd element of
+the array (0 indexed)).
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Question 1.2 (2 points)}\label{question-1.2-2-points}
+
+Now suppose we want the vehicle to end up close to the line
+\(y = 0.5x\), but we do not care exactly where on this line and what yaw
+angle it ends up in. What should we choose \(Q_f\) to be (remember to
+make sure it is symmetric and positive semidefinite)?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{Autograded answer for 1.2}
+         
+         \PY{l+s+sd}{Please implement this function so that the return argument }
+         \PY{l+s+sd}{satisfies the specification above.}
+         \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}Q\PYZus{}f\PYZus{}problem\PYZus{}1\PYZus{}2}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{Qf} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} YOUR CODE HERE TO SET Qf}
+             \PY{c+c1}{\PYZsh{} (y\PYZhy{}.5x)\PYZca{}2 == y\PYZca{}2 + .25 x\PYZca{}2 \PYZhy{} 2 * .5 x y}
+             \PY{n}{Qf}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{n}{Qf}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{25}
+             \PY{n}{Qf}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{Qf}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{5}
+             \PY{k}{return} \PY{n}{Qf}
+         
+         \PY{k}{print} \PY{n}{get\PYZus{}Q\PYZus{}f\PYZus{}problem\PYZus{}1\PYZus{}2}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 0.25 -0.5   0.  ]
+ [-0.5   1.    0.  ]
+ [ 0.    0.    0.  ]]
+
+    \end{Verbatim}
+
+    \paragraph{\texorpdfstring{Short answer explanation for 1.2. Provide a
+brief justification of your choice of \(Q_f\) in this
+cell.}{Short answer explanation for 1.2. Provide a brief justification of your choice of Q\_f in this cell.}}\label{short-answer-explanation-for-1.2.-provide-a-brief-justification-of-your-choice-of-q_f-in-this-cell.}
+
+To keep things aligned to the line \(y=.5x\), we can consider errors to
+be deviation from that line -\/- in other words
+\((y-.5x)^2 = y^2 + .25 x^2 - 2 * .5 x y\).
+
+    \subsection{Question 1.3 (3 points)}\label{question-1.3-3-points}
+
+Now suppose we want to end up close to the curve \(y = x^2\), and again
+do not care about the final yaw angle or where exactly on this curve we
+end up. Why is it not possible to set \(Q_f\) to achieve this?
+
+    \paragraph{Short answer explanation for 1.3. Please put your answer to
+this question in this
+cell.}\label{short-answer-explanation-for-1.3.-please-put-your-answer-to-this-question-in-this-cell.}
+
+It's not possible to set this because you need the error to be a
+function of \((y-x^2)\). The only way to do so is via a squared error,
+which requires terms proportional to \(x^4\) (which we can't build).
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\section{2. Optimal Control via HJB}\label{optimal-control-via-hjb}
+
+Consider the scalar equation \[
+\dot{x} = -4x + 2u,
+\] and the infinite horizon cost function \[
+J = \int_0^{\infty} [32x^2 + u^2] dt.
+\]
+
+    \subsection{Question 2.1 (5 points)}\label{question-2.1-5-points}
+
+Assume that the optimal cost-to-go function is of the form
+\(J^\star = px^2\). What value of \(p\) satisfies the
+Hamilton-Jacobi-Bellman conditions for optimality?
+
+    \paragraph{Written answer explanation for 2.1. A proper answer to this
+question involves writing out more than a couple expressions. We
+recommend working through this problem on pencil and paper first. Please
+then write your answer below in this cell, using LaTeX-style math
+expressions.}\label{written-answer-explanation-for-2.1.-a-proper-answer-to-this-question-involves-writing-out-more-than-a-couple-expressions.-we-recommend-working-through-this-problem-on-pencil-and-paper-first.-please-then-write-your-answer-below-in-this-cell-using-latex-style-math-expressions.}
+
+\[ 0 = \min_u \left[ g(x,u) + \frac{\partial J^*}{\partial x} f(x,u) \right] \]
+\[ g(x,u) = 32x^2 + u^2 \]
+\[ 0 = \min_u \left[ 32x^2 + u^2 + 2px (-4x + 2u) \right] \] Taking the
+partial wrt u, we find \[ 0 = 2 u + 4 p x \] \[ u = -2 p x \]
+\[ 0 = -4 (p-2) (p+4) x^2 \] \[ p = 2\] The negative solution wasn't
+chosen as it would represent a negative cost-to-go.
+
+    \subsection{Question 2.2 (3 points)}\label{question-2.2-3-points}
+
+Given that the optimal feedback controller associated with \(J^\star\)
+is \(u^\star = -Kx\), what is the value of \(K\)?
+
+    \paragraph{Written answer explanation for 2.2. We recommend working
+through this problem on pencil and paper first. Please then write your
+answer below in this cell, using LaTeX-style math
+expressions.}\label{written-answer-explanation-for-2.2.-we-recommend-working-through-this-problem-on-pencil-and-paper-first.-please-then-write-your-answer-below-in-this-cell-using-latex-style-math-expressions.}
+
+From above, we found a minimizer of the equation is given by
+\[ u = -2 p x\] \[ u = -4 x\] \[ K = 4\]
+
+    \section{3. Typing in the Optimal Controller for the Double
+Integrator}\label{typing-in-the-optimal-controller-for-the-double-integrator}
+
+In this problem, we'll consider the optimal control problem for the
+1-dimensional input-constrained double integrator described by
+
+\[
+\ddot{q} = u, \ |u| \leq 1
+\]
+
+Figure: Simple drawing of a double integrator
+
+As you may remember, a simple way to think of the double integrator is
+as a system which has direct control over its acceleration, like a brick
+sliding around on ice, with a rocket booster attached for control. While
+a double integrator (especially in just 1 dimension) is a very simple
+system, double or triple integrators (which control jerk, the derivative
+of acceleration) can be for example used as
+\href{http://groups.csail.mit.edu/robotics-center/public_papers/Florence16.pdf}{simple
+models (see Fig. 2) to approximate the dynamics of quadrotors}) for
+\href{https://www.youtube.com/watch?v=9a0eEscz1Cs\&t=1s}{performing
+obstacle avoidance and planning paths}.
+
+We won't often be able to simply type in an optimal controller, but for
+the double integrator, it's not too hard!
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+For this question, we want the optimal controller for a minimum-time
+cost function. Remember that for "minimum-time" problems, we just have
+the cost function:
+
+\[ J = \int_0^{\infty} g(x(t),u(t)) \ dt \]
+
+for just:
+
+\[ g(x,u) = \begin{cases}
+      0, & \text{if}\ x = 0 \\
+      1, & \text{otherwise}
+    \end{cases} \]
+
+Which gives us:
+
+\[ J = t_f \]
+
+Where \(t_f\) is the time needed to reach the desired state, 0. So our
+cost function is just the time needed to reach 0.
+
+    \subsection{Question 3.1 (4 points)}\label{question-3.1-4-points}
+
+Implement the optimal controller, and the optimal cost-to-go function,
+for the double integrator in the space below. (May help to look in the
+course notes at Example 8.2)
+
+The point of this question isn't to practice our ability to implement
+algorithms, but instead to give us some data and experience to later
+make some interesting comparisons and analyses.
+
+Also you can rest well knowing that no-one will ever have a "more
+optimal" controller than you! (But actually, this maybe isn't the best
+controller. We'll discuss why.)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{Autograded answer for 3.1}
+        
+        \PY{l+s+sd}{Please implement this function so that the return argument }
+        \PY{l+s+sd}{satisfies the specification above.}
+        \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}optimal\PYZus{}time\PYZus{}to\PYZus{}go\PYZus{}problem\PYZus{}3\PYZus{}1}\PY{p}{(}\PY{n}{q}\PY{p}{,} \PY{n}{qdot}\PY{p}{)}\PY{p}{:}
+            \PY{k+kn}{from} \PY{n+nn}{math} \PY{k+kn}{import} \PY{n}{sqrt}
+            \PY{k}{if} \PY{n}{qdot} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{q} \PY{o}{\PYZlt{}} \PY{o}{.}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{qdot}\PY{o}{*}\PY{n}{qdot} \PY{o+ow}{or} \PY{n}{qdot} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{q} \PY{o}{\PYZlt{}} \PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{qdot}\PY{o}{*}\PY{n}{qdot}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{sqrt}\PY{p}{(}\PY{o}{.}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{qdot}\PY{o}{*}\PY{n}{qdot} \PY{o}{\PYZhy{}} \PY{n}{q}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{qdot}
+            \PY{k}{elif} \PY{n}{q} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{qdot} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{0}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{n}{qdot} \PY{o}{+} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{sqrt}\PY{p}{(}\PY{o}{.}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{qdot}\PY{o}{*}\PY{n}{qdot} \PY{o}{+} \PY{n}{q}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}optimal\PYZus{}control\PYZus{}problem\PYZus{}3\PYZus{}1}\PY{p}{(}\PY{n}{q}\PY{p}{,} \PY{n}{qdot}\PY{p}{)}\PY{p}{:}
+            \PY{k+kn}{from} \PY{n+nn}{math} \PY{k+kn}{import} \PY{n}{sqrt}
+            \PY{k}{if} \PY{n}{qdot} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{q} \PY{o}{\PYZlt{}} \PY{o}{.}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{qdot}\PY{o}{*}\PY{n}{qdot} \PY{o+ow}{or} \PY{n}{qdot} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{q} \PY{o}{\PYZlt{}} \PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{qdot}\PY{o}{*}\PY{n}{qdot}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{1}
+            \PY{k}{elif} \PY{n}{q} \PY{o}{==} \PY{l+m+mi}{0} \PY{o+ow}{and} \PY{n}{qdot} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mi}{0}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \subsubsection{Plotting help for Question
+3.1}\label{plotting-help-for-question-3.1}
+
+We've written a little plotting code for you to visualize this policy:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits.mplot3d} \PY{k+kn}{import} \PY{n}{Axes3D}
+        \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{cm}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib.animation} \PY{k+kn}{as} \PY{n+nn}{animation}
+        
+        \PY{n}{num\PYZus{}q\PYZus{}bins} \PY{o}{=} \PY{l+m+mi}{31}
+        \PY{n}{qbins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.}\PY{p}{,} \PY{l+m+mf}{3.}\PY{p}{,} \PY{n}{num\PYZus{}q\PYZus{}bins}\PY{p}{)}
+        \PY{n}{num\PYZus{}qdot\PYZus{}bins} \PY{o}{=} \PY{l+m+mi}{51}
+        \PY{n}{qdotbins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.}\PY{p}{,} \PY{l+m+mf}{3.}\PY{p}{,} \PY{n}{num\PYZus{}qdot\PYZus{}bins}\PY{p}{)}
+        \PY{n}{state\PYZus{}grid} \PY{o}{=} \PY{p}{[}\PY{n+nb}{set}\PY{p}{(}\PY{n}{qbins}\PY{p}{)}\PY{p}{,} \PY{n+nb}{set}\PY{p}{(}\PY{n}{qdotbins}\PY{p}{)}\PY{p}{]}
+        
+        \PY{p}{[}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{qbins}\PY{p}{,} \PY{n}{qdotbins}\PY{p}{)}
+        
+        \PY{n}{fig\PYZus{}optimal}\PY{p}{,} \PY{p}{(}\PY{n}{ax\PYZus{}J}\PY{p}{,} \PY{n}{ax\PYZus{}Pi}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+        \PY{n}{ax\PYZus{}J}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax\PYZus{}Pi}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{ax\PYZus{}J} \PY{o}{=} \PY{n}{fig\PYZus{}optimal}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{121}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax\PYZus{}J}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{J (cost\PYZhy{}to\PYZhy{}go)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax\PYZus{}J}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax\PYZus{}J}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{qdot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{n}{ax\PYZus{}Pi} \PY{o}{=} \PY{n}{fig\PYZus{}optimal}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{122}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax\PYZus{}Pi}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pi (policy)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax\PYZus{}Pi}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{ax\PYZus{}Pi}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{qdot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{J\PYZus{}optimal} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}qdot\PYZus{}bins}\PY{p}{,} \PY{n}{num\PYZus{}q\PYZus{}bins}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{J\PYZus{}optimal}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{val} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{row}\PY{p}{)}\PY{p}{:}
+                \PY{n}{J\PYZus{}optimal}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{get\PYZus{}optimal\PYZus{}time\PYZus{}to\PYZus{}go\PYZus{}problem\PYZus{}3\PYZus{}1}\PY{p}{(}\PY{n}{Q}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{Qdot}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+            
+        \PY{n}{J\PYZus{}surface} \PY{o}{=} \PY{p}{[}\PY{n}{ax\PYZus{}J}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{J\PYZus{}optimal}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                               \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}\PY{p}{]}
+        
+        \PY{n}{Pi\PYZus{}optimal} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}qdot\PYZus{}bins}\PY{p}{,} \PY{n}{num\PYZus{}q\PYZus{}bins}\PY{p}{)}\PY{p}{)}
+        \PY{n}{Pi\PYZus{}optimal} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}qdot\PYZus{}bins}\PY{p}{,} \PY{n}{num\PYZus{}q\PYZus{}bins}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{row} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{Pi\PYZus{}optimal}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{val} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{row}\PY{p}{)}\PY{p}{:}
+                \PY{n}{Pi\PYZus{}optimal}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{get\PYZus{}optimal\PYZus{}control\PYZus{}problem\PYZus{}3\PYZus{}1}\PY{p}{(}\PY{n}{Q}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{Qdot}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{Pi\PYZus{}surface} \PY{o}{=} \PY{p}{[}\PY{n}{ax\PYZus{}Pi}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{Pi\PYZus{}optimal}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}\PY{p}{]}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    Note that the plotting code, for both J and Pi, is just based on a 3D
+mesh over a \texttt{np.meshgrid} of Q and Qdot.
+
+We recommend printing out these inputs to the plots, and practice
+manipulating the data of the plots.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Some examples of interacting with the data generated above}
+        \PY{k}{print} \PY{n}{qbins}\PY{o}{.}\PY{n}{shape}
+        \PY{k}{print} \PY{n}{qdotbins}\PY{o}{.}\PY{n}{shape}
+        \PY{k}{print} \PY{n}{Q}\PY{o}{.}\PY{n}{shape}
+        \PY{k}{print} \PY{n}{Qdot}\PY{o}{.}\PY{n}{shape}
+        \PY{k}{print} \PY{n}{J\PYZus{}optimal}\PY{o}{.}\PY{n}{shape}
+        \PY{k}{print} \PY{n}{Pi\PYZus{}optimal}\PY{o}{.}\PY{n}{shape}
+        
+        \PY{n}{terrible\PYZus{}control\PYZus{}choice} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{Pi\PYZus{}optimal}
+        \PY{n}{qbin\PYZus{}sample} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{qdotbin\PYZus{}sample} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{k}{print} \PY{n}{terrible\PYZus{}control\PYZus{}choice}\PY{p}{[}\PY{n}{qdotbin\PYZus{}sample}\PY{p}{]}\PY{p}{[}\PY{n}{qbin\PYZus{}sample}\PY{p}{]}
+        
+        \PY{n}{q} \PY{o}{=} \PY{n}{qbins}\PY{p}{[}\PY{n}{qbin\PYZus{}sample}\PY{p}{]}
+        \PY{n}{qdot} \PY{o}{=} \PY{n}{qdotbins}\PY{p}{[}\PY{n}{qdotbin\PYZus{}sample}\PY{p}{]}
+        \PY{k}{print} \PY{o}{\PYZhy{}}\PY{n}{get\PYZus{}optimal\PYZus{}control\PYZus{}problem\PYZus{}3\PYZus{}1}\PY{p}{(}\PY{n}{q}\PY{p}{,}\PY{n}{qdot}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Recommend investigating more the shapes of some of these and how they relate}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(31,)
+(51,)
+(51, 31)
+(51, 31)
+(51, 31)
+(51, 31)
+-1.0
+-1
+
+    \end{Verbatim}
+
+    \subsection{Question 3.2 (1 point)}\label{question-3.2-1-point}
+
+For a real robot, why would the minimum-time solution not necessarily be
+the "best" thing to do?
+
+    \paragraph{Written answer explanation for
+3.2.}\label{written-answer-explanation-for-3.2.}
+
+There may be additional energy costs to using bang-bang, the
+acceleration may not be able to instantaneously changed, there may be an
+errror in measuring q/qdot which can cause rather significant errors
+down the line, etc.
+
+    \section{4. Value Iteration solution for the Double
+Integrator}\label{value-iteration-solution-for-the-double-integrator}
+
+Now let's approach the same problem, but solve it using the Value
+Iteration algorithm.
+
+An implementation of that algorithm is available for you in Drake. This
+is a complete implementation of the algorithm with discrete actions and
+volumetric interpolation over state.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k+kn}{as} \PY{n+nn}{np}
+         
+         \PY{k+kn}{from} \PY{n+nn}{pydrake.systems.framework} \PY{k+kn}{import} \PY{n}{VectorSystem}
+         \PY{k+kn}{from} \PY{n+nn}{pydrake.systems.analysis} \PY{k+kn}{import} \PY{n}{Simulator}
+         \PY{k+kn}{from} \PY{n+nn}{pydrake.systems.controllers} \PY{k+kn}{import} \PY{p}{(}
+             \PY{n}{DynamicProgrammingOptions}\PY{p}{,} \PY{n}{FittedValueIteration}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} This system block implements the dynamics}
+         \PY{c+c1}{\PYZsh{} of a double integrator. It takes one control}
+         \PY{c+c1}{\PYZsh{} input, has two states (1D position and velocity),}
+         \PY{c+c1}{\PYZsh{} and copies its current state as its output.}
+         \PY{k}{class} \PY{n+nc}{DoubleIntegrator}\PY{p}{(}\PY{n}{VectorSystem}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} One input, one output, two state variables.}
+                 \PY{n}{VectorSystem}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}DeclareContinuousState}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} qddot(t) = u(t)}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}DoCalcVectorTimeDerivatives}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{context}\PY{p}{,} \PY{n}{u}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{xdot}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{xdot}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{xdot}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{u}
+         
+             \PY{c+c1}{\PYZsh{} y(t) = x(t)}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}DoCalcVectorOutput}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{context}\PY{p}{,} \PY{n}{u}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{x}
+         
+         \PY{c+c1}{\PYZsh{} Set up a simulation of this system.}
+         \PY{n}{plant} \PY{o}{=} \PY{n}{DoubleIntegrator}\PY{p}{(}\PY{p}{)}
+         \PY{n}{simulator} \PY{o}{=} \PY{n}{Simulator}\PY{p}{(}\PY{n}{plant}\PY{p}{)}
+         \PY{n}{options} \PY{o}{=} \PY{n}{DynamicProgrammingOptions}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} This function evaluates a minimum time}
+         \PY{c+c1}{\PYZsh{} running cost, given a context (which contains}
+         \PY{c+c1}{\PYZsh{} information about the current system state).}
+         \PY{k}{def} \PY{n+nf}{min\PYZus{}time\PYZus{}cost}\PY{p}{(}\PY{n}{context}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{context}\PY{o}{.}\PY{n}{get\PYZus{}continuous\PYZus{}state\PYZus{}vector}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{CopyToVector}\PY{p}{(}\PY{p}{)}
+             \PY{k}{if} \PY{n}{x}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{o}{.}\PY{l+m+mo}{05}\PY{p}{:}
+                 \PY{k}{return} \PY{l+m+mf}{0.}
+             \PY{k}{return} \PY{l+m+mf}{1.}
+         
+         \PY{c+c1}{\PYZsh{} This function evaluates a running cost}
+         \PY{c+c1}{\PYZsh{} that penalizes distance from the origin,}
+         \PY{c+c1}{\PYZsh{} as well as control effort.}
+         \PY{k}{def} \PY{n+nf}{quadratic\PYZus{}regulator\PYZus{}cost}\PY{p}{(}\PY{n}{context}\PY{p}{)}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{context}\PY{o}{.}\PY{n}{get\PYZus{}continuous\PYZus{}state\PYZus{}vector}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{CopyToVector}\PY{p}{(}\PY{p}{)}
+             \PY{n}{u} \PY{o}{=} \PY{n}{plant}\PY{o}{.}\PY{n}{EvalVectorInput}\PY{p}{(}\PY{n}{context}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{CopyToVector}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{x}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{10}\PY{o}{*}\PY{n}{u}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{u}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Pick your cost here...}
+         \PY{c+c1}{\PYZsh{}cost\PYZus{}function = min\PYZus{}time\PYZus{}cost}
+         \PY{n}{cost\PYZus{}function} \PY{o}{=} \PY{n}{quadratic\PYZus{}regulator\PYZus{}cost}
+         
+         \PY{c+c1}{\PYZsh{} This sets up the mesh of sample points over}
+         \PY{c+c1}{\PYZsh{} which we\PYZsq{}ll run the value iteration algorithm.}
+         \PY{n}{num\PYZus{}q\PYZus{}bins} \PY{o}{=} \PY{l+m+mi}{31}
+         \PY{n}{qbins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.}\PY{p}{,} \PY{l+m+mf}{3.}\PY{p}{,} \PY{n}{num\PYZus{}q\PYZus{}bins}\PY{p}{)}
+         \PY{n}{num\PYZus{}qdot\PYZus{}bins} \PY{o}{=} \PY{l+m+mi}{51}
+         \PY{n}{qdotbins} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.}\PY{p}{,} \PY{l+m+mf}{3.}\PY{p}{,} \PY{n}{num\PYZus{}qdot\PYZus{}bins}\PY{p}{)}
+         \PY{n}{state\PYZus{}grid} \PY{o}{=} \PY{p}{[}\PY{n+nb}{set}\PY{p}{(}\PY{n}{qbins}\PY{p}{)}\PY{p}{,} \PY{n+nb}{set}\PY{p}{(}\PY{n}{qdotbins}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{input\PYZus{}limit} \PY{o}{=} \PY{l+m+mf}{1.}
+         \PY{n}{input\PYZus{}grid} \PY{o}{=} \PY{p}{[}\PY{n+nb}{set}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{input\PYZus{}limit}\PY{p}{,} \PY{n}{input\PYZus{}limit}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{timestep} \PY{o}{=} \PY{l+m+mf}{0.01}
+         
+         \PY{p}{[}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{qbins}\PY{p}{,} \PY{n}{qdotbins}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Recommend not increasing the max\PYZus{}iterations too much.  Another factor of 10 should be okay, if you want to wait.}
+         \PY{n}{max\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{n}{J\PYZus{}iterations}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}qdot\PYZus{}bins}\PY{p}{,} \PY{n}{num\PYZus{}q\PYZus{}bins}\PY{p}{,} \PY{n}{max\PYZus{}iterations}\PY{p}{)}\PY{p}{)}
+         \PY{n}{Pi\PYZus{}iterations} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{num\PYZus{}qdot\PYZus{}bins}\PY{p}{,} \PY{n}{num\PYZus{}q\PYZus{}bins}\PY{p}{,} \PY{n}{max\PYZus{}iterations}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{num\PYZus{}iterations} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{def} \PY{n+nf}{add\PYZus{}iteration\PYZus{}solve}\PY{p}{(}\PY{n}{iteration}\PY{p}{,} \PY{n}{mesh}\PY{p}{,} \PY{n}{cost\PYZus{}to\PYZus{}go}\PY{p}{,} \PY{n}{policy}\PY{p}{)}\PY{p}{:}
+             \PY{k}{global} \PY{n}{num\PYZus{}iterations}\PY{p}{,} \PY{n}{J\PYZus{}iterations}\PY{p}{,} \PY{n}{Pi\PYZus{}iterations}
+             \PY{n}{num\PYZus{}iterations} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{if} \PY{n}{num\PYZus{}iterations} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{max\PYZus{}iterations}\PY{p}{:}
+                 \PY{k}{raise} \PY{n+ne}{RuntimeError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Solution did not converge within }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{max\PYZus{}iterations}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ iterations.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             
+             \PY{n}{J} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{cost\PYZus{}to\PYZus{}go}\PY{p}{,} \PY{n}{Q}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{n}{J\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{iteration}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{J}    \PY{c+c1}{\PYZsh{} \PYZdq{}first\PYZdq{} iteration here is \PYZdq{}1\PYZdq{}, so here we 0\PYZhy{}order it}
+             \PY{n}{Pi} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{policy}\PY{p}{,} \PY{n}{Q}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+             \PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{iteration}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{Pi}
+              
+         \PY{n}{options}\PY{o}{.}\PY{n}{visualization\PYZus{}callback} \PY{o}{=} \PY{n}{add\PYZus{}iteration\PYZus{}solve}
+         
+         \PY{c+c1}{\PYZsh{} Run value iteration on this mesh using}
+         \PY{c+c1}{\PYZsh{} the cost function chosen above. }
+         \PY{n}{policy}\PY{p}{,} \PY{n}{cost\PYZus{}to\PYZus{}go} \PY{o}{=} \PY{n}{FittedValueIteration}\PY{p}{(}\PY{n}{simulator}\PY{p}{,} \PY{n}{cost\PYZus{}function}\PY{p}{,}
+                                                   \PY{n}{state\PYZus{}grid}\PY{p}{,} \PY{n}{input\PYZus{}grid}\PY{p}{,}
+                                                   \PY{n}{timestep}\PY{p}{,} \PY{n}{options}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} trim array of iterations}
+         \PY{n}{J\PYZus{}iterations}  \PY{o}{=} \PY{n}{J\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{n}{num\PYZus{}iterations}\PY{p}{]}
+         \PY{n}{Pi\PYZus{}iterations} \PY{o}{=} \PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{n}{num\PYZus{}iterations}\PY{p}{]}
+         
+         \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Done solving.  Converged in }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{num\PYZus{}iterations}\PY{p}{)}\PY{o}{+}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ iterations.}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Done solving.  Converged in 2438 iterations.
+
+    \end{Verbatim}
+
+    Similar to before, it's useful to manipulate the data used to generate
+the plots.
+
+Unlike with the analytical optimal policy, where we only had one mesh
+over \(q\) and \(\dot{q}\), this time we have saved the solution state
+from each solve. Let's print out the shape of \texttt{Pi\_iterations}.
+Here we've set it up so that indexing into the last dimension gives us
+the solver at that iteration's state.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{print} \PY{n}{Pi\PYZus{}iterations}\PY{o}{.}\PY{n}{shape}
+         
+         \PY{n}{policy\PYZus{}on\PYZus{}10th\PYZus{}iteration} \PY{o}{=} \PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}
+         
+         \PY{n}{final\PYZus{}computed\PYZus{}policy}    \PY{o}{=} \PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+(51, 31, 1067)
+
+    \end{Verbatim}
+
+    \subsubsection{Now plot the result of Value
+Iteration}\label{now-plot-the-result-of-value-iteration}
+
+The above code cell already solved the value iteration code, and saved
+its iterative solution on each iteration.
+
+Now below, we plot this solution over time.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits.mplot3d} \PY{k+kn}{import} \PY{n}{Axes3D}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{cm}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.animation} \PY{k+kn}{as} \PY{n+nn}{animation}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{121}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{J (cost\PYZhy{}to\PYZhy{}go)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{qdot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{ax2} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{122}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pi (policy)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{qdot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{J\PYZus{}initial} \PY{o}{=} \PY{n}{J\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{J\PYZus{}surface} \PY{o}{=} \PY{p}{[}\PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{J\PYZus{}initial}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{Pi\PYZus{}initial} \PY{o}{=} \PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{Pi\PYZus{}surface} \PY{o}{=} \PY{p}{[}\PY{n}{ax2}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{Pi\PYZus{}initial}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                 \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{update\PYZus{}plots}\PY{p}{(}\PY{n}{iteration}\PY{p}{,} \PY{n}{J\PYZus{}iterations}\PY{p}{,} \PY{n}{J\PYZus{}surface}\PY{p}{,} \PY{n}{Pi\PYZus{}iterations}\PY{p}{,} \PY{n}{Pi\PYZus{}surface}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{iteration} \PY{o}{\PYZpc{}} \PY{l+m+mi}{10} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{return} \PY{c+c1}{\PYZsh{} only plot every 10th}
+             \PY{n}{J\PYZus{}surface}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{p}{)}
+             \PY{n}{J\PYZus{}surface}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{J\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{iteration}\PY{p}{]}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                 \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{txt} \PY{o+ow}{in} \PY{n}{fig}\PY{o}{.}\PY{n}{texts}\PY{p}{:}
+                 \PY{n}{txt}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{n+nb+bp}{False}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.04}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteration }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{iteration}\PY{p}{)}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{va}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{Pi\PYZus{}surface}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{p}{)}
+             \PY{n}{Pi\PYZus{}surface}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{ax2}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{iteration}\PY{p}{]}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                 \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}
+             
+         
+         \PY{n}{animate} \PY{o}{=} \PY{n}{animation}\PY{o}{.}\PY{n}{FuncAnimation}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{update\PYZus{}plots}\PY{p}{,} \PY{n}{num\PYZus{}iterations}\PY{p}{,} \PY{n}{interval}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{fargs}\PY{o}{=}\PY{p}{(}\PY{n}{J\PYZus{}iterations}\PY{p}{,} \PY{n}{J\PYZus{}surface}\PY{p}{,} 
+                                                                                     \PY{n}{Pi\PYZus{}iterations}\PY{p}{,} \PY{n}{Pi\PYZus{}surface}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.pyplot} \PY{k+kn}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits.mplot3d} \PY{k+kn}{import} \PY{n}{Axes3D}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{cm}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib.animation} \PY{k+kn}{as} \PY{n+nn}{animation}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{121}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{J (cost\PYZhy{}to\PYZhy{}go)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{qdot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{ax2} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{122}\PY{p}{,} \PY{n}{projection}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pi (policy)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{qdot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{J\PYZus{}initial} \PY{o}{=} \PY{n}{J\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{J\PYZus{}surface} \PY{o}{=} \PY{p}{[}\PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{J\PYZus{}initial}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{Pi\PYZus{}initial} \PY{o}{=} \PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{Pi\PYZus{}surface} \PY{o}{=} \PY{p}{[}\PY{n}{ax2}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{Pi\PYZus{}initial}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                 \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}\PY{p}{]}
+         
+         \PY{k}{def} \PY{n+nf}{update\PYZus{}plots}\PY{p}{(}\PY{n}{iteration}\PY{p}{,} \PY{n}{J\PYZus{}iterations}\PY{p}{,} \PY{n}{J\PYZus{}surface}\PY{p}{,} \PY{n}{Pi\PYZus{}iterations}\PY{p}{,} \PY{n}{Pi\PYZus{}surface}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{iteration} \PY{o}{\PYZpc{}} \PY{l+m+mi}{10} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{return} \PY{c+c1}{\PYZsh{} only plot every 10th}
+             \PY{n}{J\PYZus{}surface}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{p}{)}
+             \PY{n}{J\PYZus{}surface}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{J\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{iteration}\PY{p}{]}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                 \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{txt} \PY{o+ow}{in} \PY{n}{fig}\PY{o}{.}\PY{n}{texts}\PY{p}{:}
+                 \PY{n}{txt}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{n+nb+bp}{False}\PY{p}{)}
+             \PY{n}{fig}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.04}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteration }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n}{iteration}\PY{p}{)}\PY{p}{,} \PY{n}{ha}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{va}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{center}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{Pi\PYZus{}surface}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{p}{)}
+             \PY{n}{Pi\PYZus{}surface}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{ax2}\PY{o}{.}\PY{n}{plot\PYZus{}surface}\PY{p}{(}\PY{n}{Q}\PY{p}{,} \PY{n}{Qdot}\PY{p}{,} \PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{iteration}\PY{p}{]}\PY{p}{,} \PY{n}{rstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{cstride}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}
+                                 \PY{n}{cmap}\PY{o}{=}\PY{n}{cm}\PY{o}{.}\PY{n}{jet}\PY{p}{)}
+             
+         
+         \PY{n}{animate} \PY{o}{=} \PY{n}{animation}\PY{o}{.}\PY{n}{FuncAnimation}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{update\PYZus{}plots}\PY{p}{,} \PY{n}{num\PYZus{}iterations}\PY{p}{,} \PY{n}{interval}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{fargs}\PY{o}{=}\PY{p}{(}\PY{n}{J\PYZus{}iterations}\PY{p}{,} \PY{n}{J\PYZus{}surface}\PY{p}{,} 
+                                                                                     \PY{n}{Pi\PYZus{}iterations}\PY{p}{,} \PY{n}{Pi\PYZus{}surface}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \paragraph{Tips}\label{tips}
+
+\begin{itemize}
+\item
+  while the animation is running, you can click + drag to change the 3D
+  viewpoint
+\item
+  pressing the "Power" button for the plot above will stop the
+  animation, which is probably making your computer run pretty hard if
+  you have it running
+\item
+  restarting your jupyter notebook's kernel (the restart circle button
+  up top in jupyter notebook) will also completely free up your system
+  (but also lose all variable state)
+\end{itemize}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Run the value iteration code for the double integrator to compute the
+optimal policy and optimal cost-to-go for the minimum-time problem.
+
+Compare the result to the analytical solution we found in lecture, and
+programmed in Question 3.1 by answering the following questions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{print}\PY{p}{(}\PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{Pi\PYZus{}optimal}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{Q}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{Pi\PYZus{}iterations}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{Qdot}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{J\PYZus{}iterations}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         \PY{k}{print}\PY{p}{(}\PY{n}{J\PYZus{}optimal}\PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 2. 2. 2. 2. 1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.
+ 0. 0. 0.]
+[2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2. 2.
+ 2. 2. 2.]
+(51, 31, 1067)
+[-1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8
+ -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8 -1.8
+ -1.8 -1.8 -1.8]
+2.8565037595864013
+2.0052595180880894
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Traceback (most recent call last):
+  File "/anaconda2/lib/python2.7/site-packages/matplotlib/cbook/\_\_init\_\_.py", line 388, in process
+    proxy(*args, **kwargs)
+  File "/anaconda2/lib/python2.7/site-packages/matplotlib/cbook/\_\_init\_\_.py", line 228, in \_\_call\_\_
+    return mtd(*args, **kwargs)
+  File "/anaconda2/lib/python2.7/site-packages/matplotlib/animation.py", line 1560, in \_stop
+    self.event\_source.remove\_callback(self.\_loop\_delay)
+AttributeError: 'NoneType' object has no attribute 'remove\_callback'
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} <matplotlib.image.AxesImage at 0x12c86f690>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+         
+         \PY{n}{fig}\PY{p}{,} \PY{p}{(}\PY{n}{ax}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{Pi\PYZus{}iterations}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}ax2.imshow(Pi\PYZus{}iterations[:,:,\PYZhy{}1])}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{Pi\PYZus{}optimal}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} <matplotlib.image.AxesImage at 0x12ce457d0>
+\end{Verbatim}
+            
+    \subsection{Question 4.1 (5 points)}\label{question-4.1-5-points}
+
+Find an initial condition of the form \((2, \dot{q}_0)\) such that the
+value iteration policy takes an action in exactly the wrong direction
+from the true optimal policy.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  What value of \(\dot{q}_0\) did you find that disagrees?
+\item
+  What is the true optimal time-to-go from this state (i.e., for the
+  optimal bang-bang controller derived in class)?
+\item
+  What is the time-to-go estimated by value iteration?
+\item
+  Why are these values different?
+\end{enumerate}
+
+    \paragraph{Written answer explanation for 4.1. Bonus points if you
+generate plots that help explain your answer. (Feel free to add code
+cells, in addition to this markdown
+cell.)}\label{written-answer-explanation-for-4.1.-bonus-points-if-you-generate-plots-that-help-explain-your-answer.-feel-free-to-add-code-cells-in-addition-to-this-markdown-cell.}
+
+(Code cell added above question 4.1)
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  \(\dot{q_0}=-1.8\) disagrees with the optimal policy, suggesting
+  \(u=1\) while the optimal gives \(u=-1\)
+\item
+  The true optimal time-to-go is 2.0052595180880894
+\item
+  The time-to-go estimate 2.8565037595864013
+\item
+  These differ from discretization error (i.e. to get the optimal policy
+  requires going through points not on the mesh grid).
+\end{enumerate}
+
+    \subsection{Question 4.2 (3 points)}\label{question-4.2-3-points}
+
+When implementing value iteration, one needs to be wary of several
+implementation details.
+
+Find a setting of the discretization (i.e., the variables
+\texttt{num\_q\_bins} and \texttt{num\_qdot\_bins}) that causes the code
+to NOT converge in 10,000 iterations.
+
+The
+\href{https://github.com/RobotLocomotion/drake/blob/master/systems/controllers/dynamic_programming.cc}{underlying
+implementation} of value iteration terminates after performing an update
+to J* (following the discrete value iteration update described in class)
+and finding that the update did not change J* by more than
+\(\epsilon = 0.0001\) at any point.
+
+Why doesn't the setting you discovered converge?
+
+\emph{Note: The maximum distance between points in the \(q\) and
+\(\dot{q}\) directions should still be at most 0.2, and the grid must
+still contain the square with sides of length 2 centered about the
+origin.}
+
+    \paragraph{Short answer for 4.2.}\label{short-answer-for-4.2.}
+
+Choosing num\_q\_bins=32, num\_qdot\_bins=52 does not converge since the
+final state is not on the mesh grid.
+
+    \subsection{Question 4.3 (2 points)}\label{question-4.3-2-points}
+
+We may have noticed some issues for the value iteration solution,
+compared to what we know is the optimal solution. But it's worth taking
+a moment to consider the pros and cons of each method we've tried so
+far:
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  What is at least one reason that the value iteration algorithm is
+  powerful, compared to the analytical solution?
+\item
+  On the other hand, what is nice about the analytical solution?
+\end{enumerate}
+
+    \paragraph{Short answers for 4.3.}\label{short-answers-for-4.3.}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  The value iteration algorithm is powerful as not all (in fact most)
+  problems are not analytically solvable.
+\item
+  The analytical solution does not have any approximation/discretization
+  errors from value iteration.
+\end{enumerate}
+
+    \subsection{Question 4.4 (2 points)}\label{question-4.4-2-points}
+
+Switch the cost function for the double integrator so that we use a
+quadratic cost on both: control input, and state. This has already been
+implemented for you as: \texttt{quadratic\_regulator\_cost()}.
+
+How does the minimum-time solution of value iteration compare to the
+quadratic-regulator solution?
+
+    \paragraph{Short answer for 4.4.}\label{short-answer-for-4.4.}
+
+The solution is no longer a bang-bang controller but rather there is
+value to having a force with absolute value != 1 when along the critical
+path.
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Note: you can still receive full credit if you do not do the bonus
+questions. But you may be able to get extra credit if you do them.
+
+\section{5. Bonus Question: Value Iteration for the simple
+pendulum}\label{bonus-question-value-iteration-for-the-simple-pendulum}
+
+\subsection{Bonus 5.1 (2 points)}\label{bonus-5.1-2-points}
+
+See if you run the value iteration example for the input-constrained
+pendulum. Either replicate the setup above we provided for the double
+integrator, or use the \texttt{bash} scripts provided for the docker
+image, i.e. run:
+
+\begin{verbatim}
+# or use the bash script for your system
+./docker_run_bash_linux.sh drake-20180220 . 
+# now inside docker image
+cd /underactuated/src
+cd pendulum
+python value_iteration.py
+\end{verbatim}
+
+Question: how does the value-iteration solution compare to other control
+design methods we have explored for the input-constrained pendulum?
+
+    \paragraph{Short answer for 5.1.}\label{short-answer-for-5.1.}
+
+Value iteration finds a decent approximation to the optimal solution
+(albeit with numerical approximation/discretization error). Other
+methods we have learned (besides analytical...were there to exist a nice
+solution) aren't able to do this for all inputs. For example, any
+approach using linearization inherently has an assumption that it is
+near a fixed point, which breaks down as we get further away.
+
+    \subsection{Test your own
+implementations}\label{test-your-own-implementations}
+
+Running the cell below will run your implemented functions against unit
+tests.
+
+Don't change the cell below, or the \texttt{test\_set\_2.py} file. We
+will grade your implementations against the original files.
+
+Make sure to \textbf{SAVE} your notebook before running tests. (File
+-\/-\textgreater{} Save and Checkpoint, or use the hotkey which should
+be ctrl+s on linux, cmd+s on osx, etc)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{c+c1}{\PYZsh{} Run the test in a subprocess, to make sure it doesn\PYZsq{}t open any plots...}
+         \PY{n}{os}\PY{o}{.}\PY{n}{popen}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{python test\PYZus{}set\PYZus{}2.py set\PYZus{}2.ipynb test\PYZus{}results.json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Print the results json for review}
+         \PY{k+kn}{import} \PY{n+nn}{test\PYZus{}set\PYZus{}2}
+         \PY{k}{print} \PY{n}{test\PYZus{}set\PYZus{}2}\PY{o}{.}\PY{n}{pretty\PYZus{}format\PYZus{}json\PYZus{}results}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}results.json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Problem 1\_1: 2.00/2.00.
+
+Test Problem 1\_2: 2.00/2.00.
+
+Test Problem 3\_1 Optimal Control Input: 2.00/2.00.
+
+Test Problem 3\_1 Time (Cost) To Go: 2.00/2.00.
+
+TOTAL SCORE (automated tests only): 8.00/8.00
+
+
+    \end{Verbatim}
+
+    Note that many of the questions are not auto-graded, but will be graded
+manually! (Double-check you gave answers for each.)
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

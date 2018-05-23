@@ -1,0 +1,46 @@
+{
+    "execution_time": "30.72", 
+    "tests": [
+        {
+            "score": 5, 
+            "max_score": 5, 
+            "name": "Test force closure metric on some predefined grasps"
+        }, 
+        {
+            "score": 10, 
+            "max_score": 10, 
+            "name": "Test force closure metric on some random grasps"
+        }, 
+        {
+            "score": 5, 
+            "max_score": 5, 
+            "name": "Tests the convex hull volume is 0 for two points"
+        }, 
+        {
+            "score": 5, 
+            "max_score": 5, 
+            "name": "Tests the convex hull volume is correctly computed on a small sample set"
+        }, 
+        {
+            "output": "t:  0.0\nt:  1.0015\nt:  2.003\nt:  3.0045\nt:  4.006\nt:  5.0075\nt:  6.009\nt:  7.0105\nt:  8.012\nt:  9.0135\n", 
+            "score": 10, 
+            "max_score": 10, 
+            "name": "Test two finger grip of the box under motion A."
+        }, 
+        {
+            "output": "t:  0.0\nt:  1.0015\nt:  2.003\nt:  3.0045\nt:  4.006\nt:  5.0075\nt:  6.009\nt:  7.0105\nt:  8.012\nt:  9.0135\n", 
+            "score": 10, 
+            "max_score": 10, 
+            "name": "Test four finger grip of the large ball under motion C."
+        }, 
+        {
+            "output": "t:  0.0\nt:  1.0015\nt:  2.003\nt:  3.0045\nt:  4.006\nt:  5.0075\nt:  6.009\nt:  7.0105\nt:  8.012\nt:  9.0135\n", 
+            "score": 10, 
+            "max_score": 10, 
+            "name": "Test three finger grip of the triangle under motion B."
+        }
+    ], 
+    "score": 55, 
+    "visibility": "visible", 
+    "leaderboard": []
+}
